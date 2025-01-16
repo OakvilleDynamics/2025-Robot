@@ -4,13 +4,15 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.RollerConstants;
 import frc.robot.commands.Autos;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.CANDriveSubsystemCTRE;
+import frc.robot.subsystems.CANRollerSubsystemCTRE;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -19,17 +21,29 @@ import frc.robot.subsystems.ExampleSubsystem;
  * subsystems, commands, and trigger mappings) should be declared here.
  */
 public class RobotContainer {
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  // The robot's subsystems
+  private final CANDriveSubsystemCTRE driveSubsystem = new CANDriveSubsystemCTRE();
+  private final CANRollerSubsystemCTRE rollerSubsystem = new CANRollerSubsystemCTRE();
 
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  private final CommandXboxController m_driverController =
-      new CommandXboxController(OperatorConstants.kDriverControllerPort);
+  // The driver's controller
+  private final CommandXboxController driverController =
+      new CommandXboxController(OperatorConstants.DRIVER_CONTROLLER_PORT);
+
+  // The operator's controller
+  private final CommandXboxController operatorController =
+      new CommandXboxController(OperatorConstants.OPERATOR_CONTROLLER_PORT);
+
+  // The autonomous chooser
+  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    // Configure the trigger bindings
     configureBindings();
+
+    // Set the options to show up in the Dashboard for selecting auto modes. If you
+    // add additional auto modes you can add additional lines here with
+    // autoChooser.addOption
+    autoChooser.setDefaultOption("Autonomous", Autos.exampleAuto(driveSubsystem));
   }
 
   /**
@@ -42,13 +56,32 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
-    new Trigger(m_exampleSubsystem::exampleCondition)
-        .onTrue(new ExampleCommand(m_exampleSubsystem));
+    // Set the A button to run the "runRoller" command from the factory with a fixed
+    // value ejecting the gamepiece while the button is held
+    operatorController
+        .a()
+        .whileTrue(
+            rollerSubsystem.runRoller(
+                rollerSubsystem, () -> RollerConstants.ROLLER_EJECT_VALUE, () -> 0));
 
-    // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
-    // cancelling on release.
-    m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    // Set the default command for the drive subsystem to the command provided by
+    // factory with the values provided by the joystick axes on the driver
+    // controller. The Y axis of the controller is inverted so that pushing the
+    // stick away from you (a negative value) drives the robot forwards (a positive
+    // value)
+    driveSubsystem.setDefaultCommand(
+        driveSubsystem.driveArcade(
+            driveSubsystem,
+            () -> -driverController.getLeftY(),
+            () -> -driverController.getRightX()));
+
+    // Set the default command for the roller subsystem to the command from the
+    // factory with the values provided by the triggers on the operator controller
+    rollerSubsystem.setDefaultCommand(
+        rollerSubsystem.runRoller(
+            rollerSubsystem,
+            () -> operatorController.getRightTriggerAxis(),
+            () -> operatorController.getLeftTriggerAxis()));
   }
 
   /**
@@ -58,6 +91,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return autoChooser.getSelected();
   }
 }
