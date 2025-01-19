@@ -4,8 +4,6 @@
 
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonSRXConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -45,23 +43,31 @@ public class CANDriveSubsystemCTRE extends SubsystemBase {
     // battery voltages (at the cost of a little bit of top speed on a fully charged
     // battery). The current limit helps prevent tripping
     // breakers.
-    TalonSRXConfiguration config = new TalonSRXConfiguration();
-    config.voltageCompSaturation = 12;
-    config.continuousCurrentLimit = DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT;
+    // TalonSRXConfiguration config = new TalonSRXConfiguration();
+    // config.voltageCompSaturation = 12;
+    // config.continuousCurrentLimit = DriveConstants.DRIVE_MOTOR_CURRENT_LIMIT;
 
     // Set configuration to follow leader and then apply it to corresponding
     // follower. Resetting in case a new controller is swapped
     // in and persisting in case of a controller reset due to breaker trip
-    leftFollower.set(ControlMode.Follower, DriveConstants.LEFT_LEADER_ID);
-    leftFollower.configAllSettings(config);
-    rightFollower.set(ControlMode.Follower, DriveConstants.RIGHT_LEADER_ID);
-    rightFollower.configAllSettings(config);
+    // leftFollower.set(ControlMode.Follower, DriveConstants.LEFT_LEADER_ID);
+    // leftFollower.configAllSettings(config);
+    // rightFollower.set(ControlMode.Follower, DriveConstants.RIGHT_LEADER_ID);
+    // rightFollower.configAllSettings(config);
 
-    rightLeader.configAllSettings(config);
+    // rightLeader.configAllSettings(config);
     // Set conifg to inverted and then apply to left leader. Set Left side inverted
     // so that postive values drive both sides forward
-    leftLeader.setInverted(true);
-    leftLeader.configAllSettings(config);
+    // leftLeader.setInverted(true);
+    // leftLeader.configAllSettings(config);
+
+    leftFollower.follow(leftLeader);
+    rightFollower.follow(rightLeader);
+
+    leftLeader.setInverted(false);
+    leftFollower.setInverted(false);
+    rightLeader.setInverted(true);
+    rightFollower.setInverted(true);
   }
 
   @Override
@@ -72,5 +78,11 @@ public class CANDriveSubsystemCTRE extends SubsystemBase {
       CANDriveSubsystemCTRE driveSubsystem, DoubleSupplier xSpeed, DoubleSupplier zRotation) {
     return Commands.run(
         () -> drive.arcadeDrive(xSpeed.getAsDouble(), zRotation.getAsDouble()), driveSubsystem);
+  }
+
+  public Command driveTank(
+      CANDriveSubsystemCTRE driveSubsystem, DoubleSupplier leftSpeed, DoubleSupplier rightSpeed) {
+    return Commands.run(
+        () -> drive.tankDrive(leftSpeed.getAsDouble(), rightSpeed.getAsDouble()), driveSubsystem);
   }
 }
