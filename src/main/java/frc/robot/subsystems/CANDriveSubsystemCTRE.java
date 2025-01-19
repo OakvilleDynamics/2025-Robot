@@ -83,6 +83,11 @@ public class CANDriveSubsystemCTRE extends SubsystemBase {
   public Command driveTank(
       CANDriveSubsystemCTRE driveSubsystem, DoubleSupplier leftSpeed, DoubleSupplier rightSpeed) {
     return Commands.run(
-        () -> drive.tankDrive(leftSpeed.getAsDouble(), rightSpeed.getAsDouble()), driveSubsystem);
+        () -> drive.tankDrive(rightSpeed.getAsDouble(), leftSpeed.getAsDouble()), driveSubsystem);
   }
+
+  /**
+   * public Command driveRight( CANDriveSubsystemCTRE driveSubsystem, DoubleSupplier rightSpeed) {
+   * return Commands.run( () -> drive.DriveRight(rightSpeed.getAsDouble())); }
+   */
 }
