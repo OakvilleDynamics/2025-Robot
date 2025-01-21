@@ -28,6 +28,14 @@ public class Algea extends SubsystemBase {
     AlgeaIntake2.set(MechanismConstants.ALGEA_INTAKE_2_SPEED);
   }
 
+  public void UpAlgea() {
+    AlgeaHinge.set(MechanismConstants.ALGEA_HINGE_SPEED);
+  }
+
+  public void DownAlgea() {
+    AlgeaHinge.set(-MechanismConstants.ALGEA_HINGE_SPEED);
+  }
+
   /** Sets the Algea motors to 0% power */
   public void disableAlgea() {
     AlgeaIntake1.set(0);

@@ -20,14 +20,20 @@ public class AlgeaCommand extends Command {
 
   @Override
   public void execute() {
-    if (algeaJoystick.getRawButton(5) || algeaJoystick.getRawButton(3)) {
+    if (algeaJoystick.getRawButton(6)) {
       m_AlgeaSubsystem.intakeAlgea();
       System.out.println("Algea taking in");
-    } else if (algeaJoystick.getRawButton(6) || algeaJoystick.getRawButton(4)) {
+    } else if (algeaJoystick.getRawButton(5)) {
       m_AlgeaSubsystem.reverseAlgea();
       System.out.println("Algea spitting out");
-    } else if (algeaJoystick.getRawButton(7) || algeaJoystick.getRawButton(8)) {
-    } else {
+    } else if (algeaJoystick.getRawButton(4) || algeaJoystick.getRawButton(8)) {
+      m_AlgeaSubsystem.UpAlgea();
+      System.out.println("Algea going up");
+    } else if (algeaJoystick.getRawButton(3)) {
+      m_AlgeaSubsystem.DownAlgea();
+      System.out.println("Algea going down");
+    }
+    else {
       m_AlgeaSubsystem.disableAlgea();
     }
   }
