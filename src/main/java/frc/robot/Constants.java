@@ -13,7 +13,21 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
   public static class OperatorConstants {
-    public static final int kDriverControllerPort = 0;
+    public static final int DRIVER_CONTROLLER = 0;
+    public static final int COPILOT_CONTROLLER = 1;
+  }
+
+  public static class MechanismConstants {
+    public static final int ALGEA_HINGE = 1;
+    public static final int ALGEA_INTAKE_1 = 2;
+    public static final int ALGEA_INTAKE_2 = 3;
+    public static final boolean ALGEA_HINGE_INVERTED = false;
+    public static final boolean ALGEA_INTAKE_1_INVERTED = true;
+    public static final boolean ALGEA_INTAKE_2_INVERTED = false;
+    public static final double ALGEA_HINGE_SPEED = 0.4;
+    public static final double ALGEA_INTAKE_1_SPEED = 0.8;
+    public static final double ALGEA_INTAKE_2_SPEED = 0.4;
   }
 }
