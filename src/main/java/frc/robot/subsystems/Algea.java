@@ -5,23 +5,23 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel;
-import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
 public class Algea extends SubsystemBase {
-  private final SparkMax AlgeaHinge =
-      new SparkMax(MechanismConstants.ALGEA_HINGE, SparkLowLevel.MotorType.kBrushless);
-  private final SparkMax AlgeaIntake1 =
-      new SparkMax(MechanismConstants.ALGEA_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
-  private final SparkMax AlgeaIntake2 =
-      new SparkMax(MechanismConstants.ALGEA_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgeaHinge =
+      new SparkFlex(MechanismConstants.ALGEA_HINGE, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgeaIntake1 =
+      new SparkFlex(MechanismConstants.ALGEA_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgeaIntake2 =
+      new SparkFlex(MechanismConstants.ALGEA_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
 
-  public Algea() {
+  /* public Algea() {
     AlgeaHinge.setInverted(MechanismConstants.ALGEA_HINGE_INVERTED);
     AlgeaIntake1.setInverted(MechanismConstants.ALGEA_INTAKE_1_INVERTED);
     AlgeaIntake2.setInverted(MechanismConstants.ALGEA_INTAKE_2_INVERTED);
-  }
+  } */
 
   public void intakeAlgea() {
     AlgeaIntake1.set(MechanismConstants.ALGEA_INTAKE_1_SPEED);
