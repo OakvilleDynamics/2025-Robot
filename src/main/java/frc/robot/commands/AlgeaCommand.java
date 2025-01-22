@@ -24,8 +24,8 @@ public class AlgeaCommand extends Command {
       m_AlgeaSubsystem.intakeAlgea();
       System.out.println("Algea taking in");
     } else if (algeaJoystick.getRawButton(5)) {
-      m_AlgeaSubsystem.reverseAlgea();
-      System.out.println("Algea spitting out");
+      m_AlgeaSubsystem.shootAlgea();
+      System.out.println("Shooting Algea");
     } else if (algeaJoystick.getRawButton(4) || algeaJoystick.getRawButton(8)) {
       m_AlgeaSubsystem.UpAlgea();
       System.out.println("Algea going up");

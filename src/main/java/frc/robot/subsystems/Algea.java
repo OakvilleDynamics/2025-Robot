@@ -43,7 +43,7 @@ public class Algea extends SubsystemBase {
   }
 
   /** Reverses Algea Motors */
-  public void reverseAlgea() {
+  public void shootAlgea() {
     AlgeaIntake1.set(-MechanismConstants.ALGEA_INTAKE_1_SPEED);
     AlgeaIntake2.set(-MechanismConstants.ALGEA_INTAKE_2_SPEED);
   }
