@@ -4,28 +4,107 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.TimedRobot;
+import com.ctre.phoenix6.SignalLogger;
+import edu.wpi.first.net.PortForwarder;
+import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.Constants.HardwareConstants;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Paths;
+import org.littletonrobotics.junction.LogFileUtil;
+import org.littletonrobotics.junction.LoggedRobot;
+import org.littletonrobotics.junction.Logger;
+import org.littletonrobotics.junction.inputs.LoggedPowerDistribution;
+import org.littletonrobotics.junction.networktables.NT4Publisher;
+import org.littletonrobotics.junction.wpilog.WPILOGReader;
+import org.littletonrobotics.junction.wpilog.WPILOGWriter;
+import org.littletonrobotics.urcl.URCL;
+import swervelib.parser.SwerveParser;
 
 /**
- * The methods in this class are called automatically corresponding to each mode, as described in
- * the TimedRobot documentation. If you change the name of this class or the package after creating
- * this project, you must also update the Main.java file in the project.
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
+ * project.
  */
-public class Robot extends TimedRobot {
+public class Robot extends LoggedRobot {
+
+  private static Robot instance;
   private Command m_autonomousCommand;
 
-  private final RobotContainer m_robotContainer;
+  private RobotContainer m_robotContainer;
+
+  private Timer disabledTimer;
+
+  public Robot() {
+    instance = this;
+  }
+
+  public static Robot getInstance() {
+    return instance;
+  }
 
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
    */
-  public Robot() {
+  @Override
+  public void robotInit() {
+    // Record metadata about robot code
+    Logger.recordMetadata("ProjectName", "2024-Robot");
+    Logger.recordMetadata("RuntimeType", getRuntimeType().toString());
+    Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
+    Logger.recordMetadata("GitSHA", BuildConstants.GIT_SHA);
+    Logger.recordMetadata("GitDate", BuildConstants.GIT_DATE);
+    Logger.recordMetadata("GitBranch", BuildConstants.GIT_BRANCH);
+    // Determine if the git repo is dirty
+    switch (BuildConstants.DIRTY) {
+      case 0:
+        Logger.recordMetadata("GitDirty", "Clean");
+        break;
+      case 1:
+        Logger.recordMetadata("GitDirty", "Uncommitted changes");
+        break;
+      default:
+        Logger.recordMetadata("GitDirty", "Unknown");
+        break;
+    }
+
+    Logger.addDataReceiver(new NT4Publisher());
+    if (isReal()) {
+      LoggedPowerDistribution.getInstance(HardwareConstants.REV_PDH_ID, ModuleType.kRev);
+      Logger.registerURCL(URCL.startExternal());
+      if (Paths.get("/U").getParent() != null) {
+        Logger.addDataReceiver(new WPILOGWriter());
+        SignalLogger.start();
+      } else {
+        setUseTiming(false);
+        try {
+          String logPath = LogFileUtil.findReplayLog();
+          Logger.setReplaySource(new WPILOGReader(logPath));
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+      }
+      PortForwarder.add(5800, "photonvision-limelight", 5800);
+      PortForwarder.add(5800, "photonvision-rpi", 5800);
+    }
+
+    // Start logging
+    Logger.start();
+
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+
+    // Create a timer to disable motor brake a few seconds after disable.  This will let the robot
+    // stop
+    // immediately when disabled, but then also let it be pushed more
+    disabledTimer = new Timer();
   }
 
   /**
@@ -46,14 +125,24 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    m_robotContainer.setMotorBrake(true);
+    disabledTimer.reset();
+    disabledTimer.start();
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    if (disabledTimer.hasElapsed(Constants.Drivebase.WHEEL_LOCK_TIME)) {
+      m_robotContainer.setMotorBrake(false);
+      disabledTimer.stop();
+    }
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
   public void autonomousInit() {
+    m_robotContainer.setMotorBrake(true);
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // schedule the autonomous command (example)
@@ -75,6 +164,8 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    m_robotContainer.setDriveMode();
+    m_robotContainer.setMotorBrake(true);
   }
 
   /** This function is called periodically during operator control. */
@@ -85,6 +176,11 @@ public class Robot extends TimedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
+    try {
+      new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve"));
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
   }
 
   /** This function is called periodically during test mode. */
