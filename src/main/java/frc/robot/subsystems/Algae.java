@@ -11,45 +11,49 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
 public class Algae extends SubsystemBase {
+
+  /**
+   * Change Motor controllers depending on if we use Neo Vortexs or not Neo votrex - SparkFlex Other
+   * motors - SparkMax Using sparkmaxes for every other motor because we are using the REV ecosystem
+   */
   private final SparkFlex AlgaeHinge =
       new SparkFlex(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushless);
+
   private final SparkMax AlgaeIntake1 =
       new SparkMax(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
   private final SparkMax AlgaeIntake2 =
       new SparkMax(MechanismConstants.ALGAE_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
 
-  /* public Algea() {
-    AlgeaHinge.setInverted(MechanismConstants.ALGAE_HINGE_INVERTED);
-    AlgeaIntake1.setInverted(MechanismConstants.ALGAE_INTAKE_1_INVERTED);
-    AlgeaIntake2.setInverted(MechanismConstants.ALGAE_INTAKE_2_INVERTED);
-  } */
-
-  public void intakeAlgea() {
+  /** Intakes Algae */
+  public void intakeAlgae() {
     AlgaeIntake1.set(MechanismConstants.ALGAE_INTAKE_SPEED);
     AlgaeIntake2.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
   }
 
-  public void UpAlgea() {
+  /** Makes hinge go up */
+  public void UpAlgae() {
     AlgaeHinge.set(MechanismConstants.ALGAE_HINGE_SPEED);
   }
 
-  public void DownAlgea() {
+  /** Makes hinge go down */
+  public void DownAlgae() {
     AlgaeHinge.set(-MechanismConstants.ALGAE_HINGE_SPEED);
   }
 
-  /** Sets the Algea motors to 0% power */
-  public void disableAlgea() {
+  /** Sets the Algae motors to 0% power */
+  public void disableAlgae() {
     AlgaeIntake1.set(0);
     AlgaeIntake2.set(0);
   }
 
-  /** Reverses Algea Motors */
-  public void scoreAlgea() {
+  /** Reverses Algae intake speed to score into processor */
+  public void scoreAlgae() {
     AlgaeIntake1.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
     AlgaeIntake2.set(MechanismConstants.ALGAE_INTAKE_SPEED);
   }
 
-  public void shootAlgea() {
+  /** Releases Algae at higher power to score into the net */
+  public void shootAlgae() {
     AlgaeIntake1.set(-MechanismConstants.ALGAE_SHOOT_FAST);
     AlgaeIntake2.set(MechanismConstants.ALGAE_SHOOT_FAST);
   }

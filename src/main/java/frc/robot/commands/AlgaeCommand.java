@@ -6,6 +6,7 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Algae;
 
 public class AlgaeCommand extends Command {
+
   private final Algae m_AlgaeSubsystem;
 
   private final Joystick algaeJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER);
@@ -21,29 +22,29 @@ public class AlgaeCommand extends Command {
   @Override
   public void execute() {
     if (algaeJoystick.getRawButton(5)) {
-      m_AlgaeSubsystem.intakeAlgea();
-      System.out.println("Algea taking in");
+      m_AlgaeSubsystem.intakeAlgae();
+      System.out.println("Algae taking in");
     } else if (algaeJoystick.getRawButton(4)) {
-      m_AlgaeSubsystem.shootAlgea();
-      System.out.println("Shooting Algea");
+      m_AlgaeSubsystem.shootAlgae();
+      System.out.println("Shooting Algae");
     } else if (algaeJoystick.getRawButton(7)) {
-      m_AlgaeSubsystem.UpAlgea();
-      System.out.println("Algea going up");
+      m_AlgaeSubsystem.UpAlgae();
+      System.out.println("Algae going up");
     } else if (algaeJoystick.getRawButton(8)) {
-      m_AlgaeSubsystem.DownAlgea();
-      System.out.println("Algea going down");
+      m_AlgaeSubsystem.DownAlgae();
+      System.out.println("Algae going down");
     } else if (algaeJoystick.getRawButton(6)) {
-      m_AlgaeSubsystem.scoreAlgea();
-      System.out.println("Scoring Algea");
+      m_AlgaeSubsystem.scoreAlgae();
+      System.out.println("Scoring Algae");
     } else {
-      m_AlgaeSubsystem.disableAlgea();
+      m_AlgaeSubsystem.disableAlgae();
     }
   }
 
   @Override
   public void end(boolean interrupted) {
-    m_AlgaeSubsystem.disableAlgea();
-    m_AlgaeSubsystem.intakeAlgea();
+    m_AlgaeSubsystem.disableAlgae();
+    m_AlgaeSubsystem.intakeAlgae();
   }
 
   @Override
