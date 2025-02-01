@@ -62,7 +62,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
   /** AprilTag field layout. */
   private final AprilTagFieldLayout aprilTagFieldLayout =
-      AprilTagFieldLayout.loadField(AprilTagFields.k2024Crescendo);
+      AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
 
   /** Enable vision odometry updates while driving. */
   private final boolean visionDriveTest = false;
@@ -220,8 +220,7 @@ public class SwerveSubsystem extends SubsystemBase {
 
     return run(
         () -> {
-          Optional<PhotonPipelineResult> resultO =
-              camera.camera.getAllUnreadResults().stream().findFirst();
+          Optional<PhotonPipelineResult> resultO = camera.getBestResult();
           if (resultO.isPresent()) {
             var result = resultO.get();
             if (result.hasTargets()) {
