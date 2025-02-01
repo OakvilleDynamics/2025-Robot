@@ -14,20 +14,24 @@ package frc.robot;
  */
 public final class Constants {
 
+  public static final class HardwareConstants {
+    public static final int REV_PDH_ID = 1;
+  }
+
   public static class OperatorConstants {
     public static final int DRIVER_CONTROLLER = 0;
     public static final int COPILOT_CONTROLLER = 1;
   }
 
   public static class MechanismConstants {
-    public static final int ALGEA_INTAKE_1 = 1;
-    public static final int ALGEA_INTAKE_2 = 2;
-    public static final int ALGEA_HINGE = 3;
-    public static final boolean ALGEA_HINGE_INVERTED = false;
-    public static final boolean ALGEA_INTAKE_1_INVERTED = true;
-    public static final boolean ALGEA_INTAKE_2_INVERTED = false;
-    public static final double ALGEA_HINGE_SPEED = 0.1;
-    public static final double ALGEA_INTAKE_1_SPEED = 0.5;
-    public static final double ALGEA_INTAKE_2_SPEED = -0.5;
+    public static final int ALGAE_INTAKE_1 = 2;
+    public static final int ALGAE_INTAKE_2 = 3;
+    public static final int ALGAE_HINGE = 4;
+    public static final boolean ALGAE_HINGE_INVERTED = false;
+    public static final boolean ALGAE_INTAKE_1_INVERTED = false;
+    public static final boolean ALGAE_INTAKE_2_INVERTED = false;
+    public static final double ALGAE_HINGE_SPEED = 0.1;
+    public static final double ALGAE_INTAKE_SPEED = 0.5;
+    public static final double ALGAE_SHOOT_FAST = 1;
   }
 }
