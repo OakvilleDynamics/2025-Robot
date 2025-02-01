@@ -24,6 +24,8 @@ public final class Constants {
   }
 
   public static class MechanismConstants {
+    
+    // Algae Mech
     public static final int ALGAE_INTAKE_1 = 2;
     public static final int ALGAE_INTAKE_2 = 3;
     public static final int ALGAE_HINGE = 4;
@@ -33,5 +35,10 @@ public final class Constants {
     public static final double ALGAE_HINGE_SPEED = 0.1;
     public static final double ALGAE_INTAKE_SPEED = 0.5;
     public static final double ALGAE_SHOOT_FAST = 1;
+
+    // Shooter Mech
+    public static final int ShooterMotor = 5;
+    public static final boolean Shooter_Inverted = false;
+    public static final double ShooterSpeed = .3;
   }
 }
