@@ -148,7 +148,9 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() {
-    driverController.trigger().whileTrue(drivebase.aimAtTarget(Vision.Cameras.LIMELIGHT));
+    if (driverXbox.getAButtonPressed()) {
+      drivebase.aimAtTarget(Vision.Cameras.LIMELIGHT);
+    }
   }
 
   /**
