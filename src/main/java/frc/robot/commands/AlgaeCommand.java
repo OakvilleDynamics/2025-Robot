@@ -21,21 +21,21 @@ public class AlgaeCommand extends Command {
 
   @Override
   public void execute() {
-    if (algaeJoystick.getRawButton(5)) {
+    if (algaeJoystick.getRawButton(3)) {
       m_AlgaeSubsystem.intakeAlgae();
       System.out.println("Algae taking in");
     } else if (algaeJoystick.getRawButton(4)) {
+      m_AlgaeSubsystem.scoreAlgae();
+      System.out.println("Sscoring Algae");
+    } else if (algaeJoystick.getRawButton(7)) {
       m_AlgaeSubsystem.shootAlgae();
       System.out.println("Shooting Algae");
-    } else if (algaeJoystick.getRawButton(7)) {
+    } else if (algaeJoystick.getThrottle() <= 0.75) {
       m_AlgaeSubsystem.UpAlgae();
       System.out.println("Algae going up");
-    } else if (algaeJoystick.getRawButton(8)) {
+    } else if (algaeJoystick.getThrottle() <= -0.75) {
       m_AlgaeSubsystem.DownAlgae();
       System.out.println("Algae going down");
-    } else if (algaeJoystick.getRawButton(6)) {
-      m_AlgaeSubsystem.scoreAlgae();
-      System.out.println("Scoring Algae");
     } else {
       m_AlgaeSubsystem.disableAlgae();
     }

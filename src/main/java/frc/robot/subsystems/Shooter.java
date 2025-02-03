@@ -24,6 +24,7 @@ public class Shooter extends SubsystemBase {
             ShooterMotor.set(MechanismConstants.ShooterSpeed);
         }
 
+        // Disables motor
         public void disableShooter() { 
             ShooterMotor.set(0);
         }
