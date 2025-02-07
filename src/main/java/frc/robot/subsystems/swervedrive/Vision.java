@@ -1,4 +1,4 @@
-package frc.robot.subsystems;
+package frc.robot.subsystems.swervedrive;
 
 import static edu.wpi.first.units.Units.Microseconds;
 import static edu.wpi.first.units.Units.Milliseconds;
@@ -17,13 +17,11 @@ import edu.wpi.first.math.geometry.Transform3d;
 import edu.wpi.first.math.geometry.Translation3d;
 import edu.wpi.first.math.numbers.N1;
 import edu.wpi.first.math.numbers.N3;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.networktables.NetworkTablesJNI;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
-import frc.robot.Constants.VisionConstants.ConveyorCamera;
-import frc.robot.Constants.VisionConstants.IntakeCamera;
-import frc.robot.Constants.VisionConstants.LimeLight;
 import frc.robot.Robot;
 import java.awt.Desktop;
 import java.util.ArrayList;
@@ -285,28 +283,33 @@ public class Vision {
   }
 
   /** Camera Enum to select each camera */
-  public enum Cameras {
+  enum Cameras {
     /** Left Camera */
-    LIMELIGHT(
-        LimeLight.NAME,
-        new Rotation3d(LimeLight.ROLL, LimeLight.PITCH, LimeLight.YAW),
-        new Translation3d(LimeLight.LENGTH, LimeLight.WIDTH, LimeLight.HEIGHT),
+    LEFT_CAM(
+        "left",
+        new Rotation3d(0, Math.toRadians(-24.094), Math.toRadians(30)),
+        new Translation3d(
+            Units.inchesToMeters(12.056), Units.inchesToMeters(10.981), Units.inchesToMeters(8.44)),
         VecBuilder.fill(4, 4, 8),
         VecBuilder.fill(0.5, 0.5, 1)),
-
-    // Intake camera
-    INTAKE_CAM(
-        IntakeCamera.NAME,
-        new Rotation3d(IntakeCamera.ROLL, IntakeCamera.PITCH, IntakeCamera.YAW),
-        new Translation3d(IntakeCamera.LENGTH, IntakeCamera.WIDTH, IntakeCamera.HEIGHT),
+    /** Right Camera */
+    RIGHT_CAM(
+        "right",
+        new Rotation3d(0, Math.toRadians(-24.094), Math.toRadians(-30)),
+        new Translation3d(
+            Units.inchesToMeters(12.056),
+            Units.inchesToMeters(-10.981),
+            Units.inchesToMeters(8.44)),
         VecBuilder.fill(4, 4, 8),
         VecBuilder.fill(0.5, 0.5, 1)),
-
-    // Conveyor camera
-    CONVEYOR_CAM(
-        ConveyorCamera.NAME,
-        new Rotation3d(ConveyorCamera.ROLL, ConveyorCamera.PITCH, ConveyorCamera.YAW),
-        new Translation3d(ConveyorCamera.LENGTH, ConveyorCamera.WIDTH, ConveyorCamera.HEIGHT),
+    /** Center Camera */
+    CENTER_CAM(
+        "center",
+        new Rotation3d(0, Units.degreesToRadians(18), 0),
+        new Translation3d(
+            Units.inchesToMeters(-4.628),
+            Units.inchesToMeters(-10.687),
+            Units.inchesToMeters(16.129)),
         VecBuilder.fill(4, 4, 8),
         VecBuilder.fill(0.5, 0.5, 1));
 

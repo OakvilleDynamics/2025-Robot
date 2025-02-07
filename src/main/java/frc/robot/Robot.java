@@ -4,26 +4,23 @@
 
 package frc.robot;
 
-import com.ctre.phoenix6.SignalLogger;
-import edu.wpi.first.net.PortForwarder;
-import edu.wpi.first.wpilibj.Filesystem;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.HardwareConstants;
-import java.io.File;
-import java.io.IOException;
+
 import java.nio.file.Paths;
-import org.littletonrobotics.junction.LogFileUtil;
+
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
 import org.littletonrobotics.junction.inputs.LoggedPowerDistribution;
 import org.littletonrobotics.junction.networktables.NT4Publisher;
-import org.littletonrobotics.junction.wpilog.WPILOGReader;
 import org.littletonrobotics.junction.wpilog.WPILOGWriter;
 import org.littletonrobotics.urcl.URCL;
-import swervelib.parser.SwerveParser;
+
+import com.ctre.phoenix6.SignalLogger;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -42,19 +39,8 @@ public class Robot extends LoggedRobot {
 
   public Robot() {
     instance = this;
-  }
 
-  public static Robot getInstance() {
-    return instance;
-  }
-
-  /**
-   * This function is run when the robot is first started up and should be used for any
-   * initialization code.
-   */
-  @Override
-  public void robotInit() {
-    // Record metadata about robot code
+    // Log all robot metadata to AdvantageKit/AdvantageScope
     Logger.recordMetadata("ProjectName", "2024-Robot");
     Logger.recordMetadata("RuntimeType", getRuntimeType().toString());
     Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
@@ -74,29 +60,37 @@ public class Robot extends LoggedRobot {
         break;
     }
 
-    Logger.addDataReceiver(new NT4Publisher());
+    Logger.registerURCL(URCL.startExternal());
+
+    // Check if the robot is real or simulated for logging purposes.
     if (isReal()) {
-      LoggedPowerDistribution.getInstance(HardwareConstants.REV_PDH_ID, ModuleType.kRev);
-      Logger.registerURCL(URCL.startExternal());
+      LoggedPowerDistribution.getInstance(HardwareConstants.kREV_PDH_ID, ModuleType.kRev);
+      // Publish data to NetworkTables
+      Logger.addDataReceiver(new NT4Publisher());
       if (Paths.get("/U").getParent() != null) {
+        // Log data to U:/Logs
         Logger.addDataReceiver(new WPILOGWriter());
         SignalLogger.start();
-      } else {
-        setUseTiming(false);
-        try {
-          String logPath = LogFileUtil.findReplayLog();
-          Logger.setReplaySource(new WPILOGReader(logPath));
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
       }
-      PortForwarder.add(5800, "photonvision-limelight", 5800);
-      PortForwarder.add(5800, "photonvision-rpi", 5800);
+    } else {
+      // Run as fast as possible in simulation
+      setUseTiming(false);
     }
 
-    // Start logging
+    // Start logging! No more data receivers, replay sources, or metadata values may be added.
     Logger.start();
+  }
 
+  public static Robot getInstance() {
+    return instance;
+  }
+
+  /**
+   * This function is run when the robot is first started up and should be used for any
+   * initialization code.
+   */
+  @Override
+  public void robotInit() {
     // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
@@ -105,6 +99,10 @@ public class Robot extends LoggedRobot {
     // stop
     // immediately when disabled, but then also let it be pushed more
     disabledTimer = new Timer();
+
+    if (isSimulation()) {
+      DriverStation.silenceJoystickConnectionWarning(true);
+    }
   }
 
   /**
@@ -133,7 +131,7 @@ public class Robot extends LoggedRobot {
 
   @Override
   public void disabledPeriodic() {
-    if (disabledTimer.hasElapsed(Constants.Drivebase.WHEEL_LOCK_TIME)) {
+    if (disabledTimer.hasElapsed(Constants.DrivebaseConstants.WHEEL_LOCK_TIME)) {
       m_robotContainer.setMotorBrake(false);
       disabledTimer.stop();
     }
@@ -163,9 +161,9 @@ public class Robot extends LoggedRobot {
     // this line or comment it out.
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
+    } else {
+      CommandScheduler.getInstance().cancelAll();
     }
-    m_robotContainer.setDriveMode();
-    m_robotContainer.setMotorBrake(true);
   }
 
   /** This function is called periodically during operator control. */
@@ -176,11 +174,6 @@ public class Robot extends LoggedRobot {
   public void testInit() {
     // Cancels all running commands at the start of test mode.
     CommandScheduler.getInstance().cancelAll();
-    try {
-      new SwerveParser(new File(Filesystem.getDeployDirectory(), "swerve"));
-    } catch (IOException e) {
-      throw new RuntimeException(e);
-    }
   }
 
   /** This function is called periodically during test mode. */
