@@ -18,6 +18,7 @@ public class Algae extends SubsystemBase {
    */
   private final SparkFlex AlgaeHinge =
       new SparkFlex(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushless);
+
   private final SparkMax AlgaeIntake1 =
       new SparkMax(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
   private final SparkMax AlgaeIntake2 =

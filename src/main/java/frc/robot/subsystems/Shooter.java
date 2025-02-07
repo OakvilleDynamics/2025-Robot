@@ -10,22 +10,22 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
 public class Shooter extends SubsystemBase {
-    
-    private final SparkMax ShooterMotor =
-        new SparkMax (MechanismConstants.ShooterMotor, SparkLowLevel.MotorType.kBrushless);
 
-        // Intake Coral
-        public void intakeCoral() {
-            ShooterMotor.set(-MechanismConstants.ShooterSpeed);
-        }
+  private final SparkMax ShooterMotor =
+      new SparkMax(MechanismConstants.ShooterMotor, SparkLowLevel.MotorType.kBrushless);
 
-        // Shoot Coral
-        public void shootCoral() { 
-            ShooterMotor.set(MechanismConstants.ShooterSpeed);
-        }
+  // Intake Coral
+  public void intakeCoral() {
+    ShooterMotor.set(-MechanismConstants.ShooterSpeed);
+  }
 
-        // Disables motor
-        public void disableShooter() { 
-            ShooterMotor.set(0);
-        }
-    }
+  // Shoot Coral
+  public void shootCoral() {
+    ShooterMotor.set(MechanismConstants.ShooterSpeed);
+  }
+
+  // Disables motor
+  public void disableShooter() {
+    ShooterMotor.set(0);
+  }
+}

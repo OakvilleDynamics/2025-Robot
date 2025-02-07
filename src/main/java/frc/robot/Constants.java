@@ -24,7 +24,7 @@ public final class Constants {
   }
 
   public static class MechanismConstants {
-    
+
     // Algae Mech
     public static final int ALGAE_INTAKE_1 = 2;
     public static final int ALGAE_INTAKE_2 = 3;

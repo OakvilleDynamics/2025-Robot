@@ -6,12 +6,12 @@ import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.Shooter;
 
 public class ShooterCommand extends Command {
-    
-    private final Shooter m_ShooterSubsystem;
 
-    private final Joystick coralJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER); 
+  private final Shooter m_ShooterSubsystem;
 
-    public ShooterCommand(Shooter subsystem) {
+  private final Joystick coralJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER);
+
+  public ShooterCommand(Shooter subsystem) {
     m_ShooterSubsystem = subsystem;
     addRequirements(m_ShooterSubsystem);
   }
@@ -22,13 +22,13 @@ public class ShooterCommand extends Command {
   @Override
   public void execute() {
     if (coralJoystick.getRawButton(5)) {
-        m_ShooterSubsystem.intakeCoral();
-        System.out.println("Intaking Coral");
+      m_ShooterSubsystem.intakeCoral();
+      System.out.println("Intaking Coral");
     } else if (coralJoystick.getRawButton(6)) {
-        m_ShooterSubsystem.shootCoral();
-        System.out.println("Shooting Coral");
+      m_ShooterSubsystem.shootCoral();
+      System.out.println("Shooting Coral");
     } else {
-        m_ShooterSubsystem.disableShooter();
+      m_ShooterSubsystem.disableShooter();
     }
-}
+  }
 }
