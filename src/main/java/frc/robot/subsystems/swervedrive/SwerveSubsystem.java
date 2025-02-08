@@ -17,8 +17,6 @@ import com.pathplanner.lib.path.PathPlannerPath;
 import com.pathplanner.lib.util.DriveFeedforwards;
 import com.pathplanner.lib.util.swerve.SwerveSetpoint;
 import com.pathplanner.lib.util.swerve.SwerveSetpointGenerator;
-import edu.wpi.first.apriltag.AprilTagFieldLayout;
-import edu.wpi.first.apriltag.AprilTagFields;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -59,10 +57,6 @@ public class SwerveSubsystem extends SubsystemBase {
   /** Swerve drive object. */
   private final SwerveDrive swerveDrive;
 
-  /** AprilTag field layout. */
-  private final AprilTagFieldLayout aprilTagFieldLayout =
-      AprilTagFieldLayout.loadField(AprilTagFields.k2025Reefscape);
-
   /** Enable vision odometry updates while driving. */
   private final boolean visionDriveTest = false;
 
@@ -91,21 +85,21 @@ public class SwerveSubsystem extends SubsystemBase {
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
-    swerveDrive.setHeadingCorrection(false);
     // Heading correction should only be used while controlling the robot via angle.
-    swerveDrive.setCosineCompensator(false);
-    // !SwerveDriveTelemetry.isSimulation);
+    swerveDrive.setHeadingCorrection(false);
     // Disables cosine compensation for simulations since it causes discrepancies not seen in real
     // life.
-    swerveDrive.setAngularVelocityCompensation(true, true, 0.1);
+    // !SwerveDriveTelemetry.isSimulation);
+    swerveDrive.setCosineCompensator(false);
     // Correct for skew that gets worse as angular velocity increases. Start with a coefficient of
     // 0.1.
-    swerveDrive.setModuleEncoderAutoSynchronize(false, 1);
+    swerveDrive.setAngularVelocityCompensation(true, true, 0.1);
     // Enable if you want to resynchronize your absolute encoders and motor encoders periodically
     // when they are not moving.
-    //    swerveDrive.pushOffsetsToEncoders();
+    swerveDrive.setModuleEncoderAutoSynchronize(false, 1);
     // Set the absolute encoder to be used over the internal encoder and push the offsets onto it.
     // Throws warning if not possible
+    // swerveDrive.pushOffsetsToEncoders();
     if (visionDriveTest) {
       setupPhotonVision();
       // Stop the odometry thread if we are using vision that way we can synchronize updates better.

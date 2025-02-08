@@ -58,7 +58,7 @@ public class Vision {
   public VisionSystemSim visionSim;
 
   /** Count of times that the odom thinks we're more than 10meters away from the april tag. */
-  private double longDistangePoseEstimationCount = 0;
+  private double longDistancePoseEstimationCount = 0;
 
   /** Current pose from the pose estimator using wheel odometry. */
   private Supplier<Pose2d> currentPose;
@@ -183,15 +183,15 @@ public class Vision {
       // est pose is very far from recorded robot pose
       if (PhotonUtils.getDistanceToPose(currentPose.get(), pose.get().estimatedPose.toPose2d())
           > 1) {
-        longDistangePoseEstimationCount++;
+        longDistancePoseEstimationCount++;
 
         // if it calculates that were 10 meter away for more than 10 times in a row its probably
         // right
-        if (longDistangePoseEstimationCount < 10) {
+        if (longDistancePoseEstimationCount < 10) {
           return Optional.empty();
         }
       } else {
-        longDistangePoseEstimationCount = 0;
+        longDistancePoseEstimationCount = 0;
       }
       return pose;
     }
