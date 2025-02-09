@@ -39,8 +39,7 @@ public class RobotContainer {
     algae.setDefaultCommand(new AlgaeCommand(algae));
     shooter.setDefaultCommand(new ShooterCommand(shooter));
 
-    NamedCommands.registerCommand(
-      "ShootCoral", new InstantCommand(() -> shooter.shootCoral()));
+    NamedCommands.registerCommand("ShootCoral", new InstantCommand(() -> shooter.shootCoral()));
     NamedCommands.registerCommand(
         "StopShooter", new InstantCommand(() -> shooter.disableShooter()));
 

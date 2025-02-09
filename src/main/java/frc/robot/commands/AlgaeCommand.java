@@ -29,7 +29,7 @@ public class AlgaeCommand extends Command {
       System.out.println("Algae taking in");
     } else if (algaeJoystick.getRawButton(4)) {
       m_AlgaeSubsystem.scoreAlgae();
-      System.out.println("Sscoring Algae");
+      System.out.println("Scoring Algae");
     } else if (algaeJoystick.getRawButton(7)) {
       m_AlgaeSubsystem.shootAlgae();
       System.out.println("Shooting Algae");
@@ -41,6 +41,7 @@ public class AlgaeCommand extends Command {
       System.out.println("Algae going down");
     } else {
       m_AlgaeSubsystem.disableAlgae();
+      m_AlgaeSubsystem.disablehinge();
     }
   }
 

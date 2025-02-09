@@ -6,7 +6,6 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkFlex;
 import com.revrobotics.spark.SparkLowLevel;
-import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
@@ -19,10 +18,10 @@ public class Algae extends SubsystemBase {
   private final SparkFlex AlgaeHinge =
       new SparkFlex(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushless);
 
-  private final SparkMax AlgaeIntake1 =
-      new SparkMax(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
-  private final SparkMax AlgaeIntake2 =
-      new SparkMax(MechanismConstants.ALGAE_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgaeIntake1 =
+      new SparkFlex(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgaeIntake2 =
+      new SparkFlex(MechanismConstants.ALGAE_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
 
   /** Intakes Algae */
   public void intakeAlgae() {
@@ -44,6 +43,11 @@ public class Algae extends SubsystemBase {
   public void disableAlgae() {
     AlgaeIntake1.set(0);
     AlgaeIntake2.set(0);
+  }
+
+  // Stops Algae Hinge
+  public void disablehinge() {
+    AlgaeHinge.set(0);
   }
 
   /** Reverses Algae intake speed to score into processor */
