@@ -76,7 +76,7 @@ public class SwerveSubsystem extends SubsystemBase {
       swerveDrive =
           new SwerveParser(directory)
               .createSwerveDrive(
-                  Constants.MAX_SPEED,
+                  Constants.kMAX_SPEED,
                   new Pose2d(
                       new Translation2d(Meter.of(1), Meter.of(4)), Rotation2d.fromDegrees(0)));
       // Alternative method if you don't want to supply the conversion factor via JSON files.
@@ -120,7 +120,7 @@ public class SwerveSubsystem extends SubsystemBase {
         new SwerveDrive(
             driveCfg,
             controllerCfg,
-            Constants.MAX_SPEED,
+            Constants.kMAX_SPEED,
             new Pose2d(new Translation2d(Meter.of(2), Meter.of(0)), Rotation2d.fromDegrees(0)));
   }
 
@@ -613,7 +613,7 @@ public class SwerveSubsystem extends SubsystemBase {
         headingX,
         headingY,
         getHeading().getRadians(),
-        Constants.MAX_SPEED);
+        Constants.kMAX_SPEED);
   }
 
   /**
@@ -633,7 +633,7 @@ public class SwerveSubsystem extends SubsystemBase {
         scaledInputs.getY(),
         angle.getRadians(),
         getHeading().getRadians(),
-        Constants.MAX_SPEED);
+        Constants.kMAX_SPEED);
   }
 
   /**

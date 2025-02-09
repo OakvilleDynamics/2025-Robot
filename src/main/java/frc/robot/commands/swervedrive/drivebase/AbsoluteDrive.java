@@ -97,9 +97,9 @@ public class AbsoluteDrive extends Command {
             translation,
             swerve.getFieldVelocity(),
             swerve.getPose(),
-            Constants.LOOP_TIME,
-            Constants.ROBOT_MASS,
-            List.of(Constants.CHASSIS),
+            Constants.kLOOP_TIME,
+            Constants.kROBOT_MASS,
+            List.of(Constants.kCHASSIS),
             swerve.getSwerveDriveConfiguration());
     SmartDashboard.putNumber("LimitedTranslation", translation.getX());
     SmartDashboard.putString("Translation", translation.toString());

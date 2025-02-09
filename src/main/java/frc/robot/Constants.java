@@ -18,11 +18,11 @@ import swervelib.math.Matter;
  */
 public final class Constants {
 
-  public static final double ROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
-  public static final Matter CHASSIS =
-      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), ROBOT_MASS);
-  public static final double LOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
-  public static final double MAX_SPEED = Units.feetToMeters(14.5);
+  public static final double kROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
+  public static final Matter kCHASSIS =
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), kROBOT_MASS);
+  public static final double kLOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
+  public static final double kMAX_SPEED = Units.feetToMeters(14.5);
 
   // Maximum speed of the robot in meters per second, used to limit acceleration.
 
@@ -36,16 +36,17 @@ public final class Constants {
   public static final class DrivebaseConstants {
 
     // Hold time on motor brakes when disabled
-    public static final double WHEEL_LOCK_TIME = 10; // seconds
+    public static final double kWHEEL_LOCK_TIME = 10; // seconds
+    public static final double kMAX_AUTO_SPEED = 0.5;
   }
 
   public static class OperatorConstants {
 
     // Joystick Deadband
-    public static final double DEADBAND = 0.1;
-    public static final double LEFT_Y_DEADBAND = 0.1;
-    public static final double RIGHT_X_DEADBAND = 0.1;
-    public static final double TURN_CONSTANT = 6;
+    public static final double kDEADBAND = 0.1;
+    public static final double kLEFT_Y_DEADBAND = 0.1;
+    public static final double kRIGHT_X_DEADBAND = 0.1;
+    public static final double kTURN_CONSTANT = 6;
   }
 
   public static class HardwareConstants {

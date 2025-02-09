@@ -121,9 +121,9 @@ public class AbsoluteDriveAdv extends Command {
             translation,
             swerve.getFieldVelocity(),
             swerve.getPose(),
-            Constants.LOOP_TIME,
-            Constants.ROBOT_MASS,
-            List.of(Constants.CHASSIS),
+            Constants.kLOOP_TIME,
+            Constants.kROBOT_MASS,
+            List.of(Constants.kCHASSIS),
             swerve.getSwerveDriveConfiguration());
     SmartDashboard.putNumber("LimitedTranslation", translation.getX());
     SmartDashboard.putString("Translation", translation.toString());
@@ -133,7 +133,7 @@ public class AbsoluteDriveAdv extends Command {
       resetHeading = true;
       swerve.drive(
           translation,
-          (Constants.OperatorConstants.TURN_CONSTANT * -headingAdjust.getAsDouble()),
+          (Constants.OperatorConstants.kTURN_CONSTANT * -headingAdjust.getAsDouble()),
           true);
     } else {
       swerve.drive(translation, desiredSpeeds.omegaRadiansPerSecond, true);

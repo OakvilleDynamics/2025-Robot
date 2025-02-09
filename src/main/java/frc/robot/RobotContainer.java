@@ -44,7 +44,7 @@ public class RobotContainer {
               () -> driverXbox.getLeftY() * -1,
               () -> driverXbox.getLeftX() * -1)
           .withControllerRotationAxis(driverXbox::getRightX)
-          .deadband(OperatorConstants.DEADBAND)
+          .deadband(OperatorConstants.kDEADBAND)
           .scaleTranslation(0.8)
           .allianceRelativeControl(true);
 
@@ -65,7 +65,7 @@ public class RobotContainer {
               () -> -driverXbox.getLeftY(),
               () -> -driverXbox.getLeftX())
           .withControllerRotationAxis(() -> driverXbox.getRawAxis(2))
-          .deadband(OperatorConstants.DEADBAND)
+          .deadband(OperatorConstants.kDEADBAND)
           .scaleTranslation(0.8)
           .allianceRelativeControl(true);
   // Derive the heading axis with math!
