@@ -20,24 +20,28 @@ public class AlgaeCommand extends Command {
   public void initialize() {}
 
   @Override
+
+  // Controls for the Algae
+
   public void execute() {
-    if (algaeJoystick.getRawButton(5)) {
+    if (algaeJoystick.getRawButton(3)) {
       m_AlgaeSubsystem.intakeAlgae();
       System.out.println("Algae taking in");
     } else if (algaeJoystick.getRawButton(4)) {
-      m_AlgaeSubsystem.shootAlgae();
-      System.out.println("Shooting Algae");
-    } else if (algaeJoystick.getRawButton(7)) {
-      m_AlgaeSubsystem.UpAlgae();
-      System.out.println("Algae going up");
-    } else if (algaeJoystick.getRawButton(8)) {
-      m_AlgaeSubsystem.DownAlgae();
-      System.out.println("Algae going down");
-    } else if (algaeJoystick.getRawButton(6)) {
       m_AlgaeSubsystem.scoreAlgae();
       System.out.println("Scoring Algae");
+    } else if (algaeJoystick.getRawButton(7)) {
+      m_AlgaeSubsystem.shootAlgae();
+      System.out.println("Shooting Algae");
+    } else if (algaeJoystick.getRawButton(11)) {
+      m_AlgaeSubsystem.UpAlgae();
+      System.out.println("Algae going up");
+    } else if (algaeJoystick.getRawButton(12)) {
+      m_AlgaeSubsystem.DownAlgae();
+      System.out.println("Algae going down");
     } else {
       m_AlgaeSubsystem.disableAlgae();
+      m_AlgaeSubsystem.disablehinge();
     }
   }
 
