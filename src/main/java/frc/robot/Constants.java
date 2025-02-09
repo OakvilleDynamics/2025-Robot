@@ -47,7 +47,7 @@ public final class Constants {
     // Shooter Motor ID
     public static final int ShooterMotor = 5;
 
-    // \Inverts
+    // Inverts
     public static final boolean Shooter_Inverted = false;
 
     // Motor speed
