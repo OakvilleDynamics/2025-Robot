@@ -20,6 +20,10 @@ public class ShooterCommand extends Command {
   public void initialize() {}
 
   @Override
+
+  // Controls for Shooter Mech
+
+  
   public void execute() {
     if (coralJoystick.getRawButton(5)) {
       m_ShooterSubsystem.intakeCoral();

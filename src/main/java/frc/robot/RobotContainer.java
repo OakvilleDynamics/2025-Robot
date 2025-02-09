@@ -4,21 +4,20 @@
 
 package frc.robot;
 
-// import com.pathplanner.lib.auto.NamedCommands;
-import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
-import edu.wpi.first.wpilibj2.command.button.Trigger;
-
 import com.pathplanner.lib.auto.NamedCommands;
-
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.commands.AlgaeCommand;
+import frc.robot.commands.ShooterCommand;
 import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Shooter;
-import frc.robot.commands.ShooterCommand;
-import frc.robot.commands.AlgaeCommand;
 
-// TODO: Code Container
+// import frc.robot.commands.autoCommands.algae;
+// import frc.robot.commands.auto.ShootCoral;
+
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
  * "declarative" paradigm, very little robot logic should actually be handled in the {@link Robot}
@@ -33,16 +32,18 @@ public class RobotContainer {
   private final Algae algae = new Algae();
   private final Shooter shooter = new Shooter();
 
-  
+  // Named Commands
+
   public RobotContainer() {
 
     algae.setDefaultCommand(new AlgaeCommand(algae));
     shooter.setDefaultCommand(new ShooterCommand(shooter));
 
     NamedCommands.registerCommand(
-      "Shoot Coral", new InstantCommand(() -> shooter.shootCoral()));
+      "ShootCoral", new InstantCommand(() -> shooter.shootCoral()));
+    NamedCommands.registerCommand(
+        "StopShooter", new InstantCommand(() -> shooter.disableShooter()));
 
-    
     configureBindings();
   }
 
