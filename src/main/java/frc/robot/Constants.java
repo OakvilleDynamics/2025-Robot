@@ -32,25 +32,28 @@ public final class Constants {
     public static final int ALGAE_INTAKE_2 = 3;
     public static final int ALGAE_HINGE = 4;
 
+    // Shooter Motor ID
+    public static final int ShooterMotor = 5;
+
+    // Four Bar ID
+    public static final int FourbarMotor = 6;
+
     // Inverts
     public static final boolean ALGAE_HINGE_INVERTED = false;
     public static final boolean ALGAE_INTAKE_1_INVERTED = false;
     public static final boolean ALGAE_INTAKE_2_INVERTED = false;
+    public static final boolean FourBar_Inverted = false;
+    public static final boolean Shooter_Inverted = false;
 
-    // Motor Speeds
+    // Motor Speeds for Algae
     public static final double ALGAE_HINGE_SPEED = 0.1;
     public static final double ALGAE_INTAKE_SPEED = 0.5;
     public static final double ALGAE_SHOOT_FAST = 1;
 
-    // Shooter Mech Constants
-
-    // Shooter Motor ID
-    public static final int ShooterMotor = 5;
-
-    // Inverts
-    public static final boolean Shooter_Inverted = false;
-
-    // Motor speed
+    // Motor speed for Shooter
     public static final double ShooterSpeed = .3;
+
+    // Motor Speed for FourBar
+    public static final double FourBarSpeed = .4;
   }
 }

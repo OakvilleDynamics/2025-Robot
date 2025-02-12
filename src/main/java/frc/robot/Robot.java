@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkLimitSwitch;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -17,6 +19,9 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private final RobotContainer m_robotContainer;
+  private RelativeEncoder encoder;
+  private SparkLimitSwitch forwardLimitSwitch;
+  private SparkLimitSwitch reverseLimitSwitch;
 
   /**
    * This function is run when the robot is first started up and should be used for any
