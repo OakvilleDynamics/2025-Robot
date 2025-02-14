@@ -1,8 +1,9 @@
 {
-  "angleJoystickRadiusDeadband": 0.05,
+  "$schema": "https://broncbotz3481.github.io/YAGSL-Example/schemas/controllerproperties_schema.json",
+  "angleJoystickRadiusDeadband": 0.5,
   "heading": {
     "p": 0.4,
     "i": 0,
-    "d": 0
+    "d": 0.01
   }
 }

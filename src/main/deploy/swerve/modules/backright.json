@@ -1,30 +1,27 @@
 {
-  "location": {
-    "front": -10.5,
-    "left": -10.625
-  },
-  "absoluteEncoderOffset": 299.267578125,
+  "$schema": "https://broncbotz3481.github.io/YAGSL-Example/schemas/module_schema.json",
   "drive": {
     "type": "sparkmax_neo",
-    "id": 11,
-    "canbus": null
+    "id": 5,
+    "canbus": "rio"
   },
   "angle": {
     "type": "sparkmax_neo",
-    "id": 12,
-    "canbus": null
-  },
-  "conversionFactor": {
-    "angle": 0,
-    "drive": 0
+    "id": 6,
+    "canbus": "rio"
   },
   "encoder": {
     "type": "cancoder",
-    "id": 13,
-    "canbus": null
+    "id": 11,
+    "canbus": "rio"
   },
   "inverted": {
     "drive": false,
     "angle": false
+  },
+  "absoluteEncoderOffset": -18.281,
+  "location": {
+    "front": -12,
+    "left": -12
   }
 }
