@@ -2,17 +2,17 @@
   "$schema": "https://broncbotz3481.github.io/YAGSL-Example/schemas/module_schema.json",
   "drive": {
     "type": "sparkmax_neo",
-    "id": 4,
+    "id": 31,
     "canbus": "rio"
   },
   "angle": {
     "type": "sparkmax_neo",
-    "id": 3,
+    "id": 32,
     "canbus": "rio"
   },
   "encoder": {
     "type": "cancoder",
-    "id": 9,
+    "id": 33,
     "canbus": "rio"
   },
   "inverted": {
