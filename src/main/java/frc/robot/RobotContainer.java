@@ -8,6 +8,8 @@ import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
+import edu.wpi.first.wpilibj.Alert;
+import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
@@ -33,6 +35,16 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+
+  // Driver station alerts for software deployment of branches and Git status
+  private Alert gitDirtyAlert =
+      new Alert(
+          "There are uncommitted changes made to the repository! Please create a commit with all changes as soon as possible!",
+          AlertType.kWarning);
+  private Alert gitBranchAlert =
+      new Alert(
+          "You are not on the \"main\" branch. Please merge your changes with the \"main\" branch as soon as possible.",
+          AlertType.kWarning);
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular
@@ -83,6 +95,15 @@ public class RobotContainer {
     configureBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
     NamedCommands.registerCommand("test", Commands.print("I EXIST"));
+
+    // Check if branch is dirty
+    if (BuildConstants.DIRTY == 1) {
+      gitDirtyAlert.set(true);
+    }
+    // Check if branch is not on main
+    if (BuildConstants.GIT_BRANCH != "main") {
+      gitBranchAlert.set(true);
+    }
   }
 
   /**
