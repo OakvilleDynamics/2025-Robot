@@ -1,4 +1,4 @@
-package frc.robot.subsystems.swervedrive;
+package frc.robot.subsystems;
 
 import static edu.wpi.first.units.Units.Microseconds;
 import static edu.wpi.first.units.Units.Milliseconds;
@@ -283,10 +283,10 @@ public class Vision {
   }
 
   /** Camera Enum to select each camera */
-  enum Cameras {
+  public enum Cameras {
     /** Left Camera */
-    LEFT_CAM(
-        "left",
+    PI_TEST(
+        "Pi-Test",
         new Rotation3d(0, Math.toRadians(-24.094), Math.toRadians(30)),
         new Translation3d(
             Units.inchesToMeters(12.056), Units.inchesToMeters(10.981), Units.inchesToMeters(8.44)),
@@ -294,7 +294,7 @@ public class Vision {
         VecBuilder.fill(0.5, 0.5, 1)),
     /** Right Camera */
     RIGHT_CAM(
-        "right",
+        "Limelight",
         new Rotation3d(0, Math.toRadians(-24.094), Math.toRadians(-30)),
         new Translation3d(
             Units.inchesToMeters(12.056),

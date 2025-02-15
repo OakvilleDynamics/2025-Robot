@@ -18,7 +18,8 @@ import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.swervedrive.SwerveSubsystem;
+import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.Vision;
 import java.io.File;
 import swervelib.SwerveInputStream;
 
@@ -153,7 +154,9 @@ public class RobotContainer {
       driverXbox.rightBumper().onTrue(Commands.none());
     } else {
       driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      driverXbox
+          .x()
+          .onTrue(Commands.run(() -> drivebase.aimAtTarget(Vision.Cameras.PI_TEST).schedule()));
       driverXbox
           .b()
           .whileTrue(

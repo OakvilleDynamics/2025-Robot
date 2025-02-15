@@ -5,8 +5,8 @@
 package frc.robot.commands.swervedrive;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.swervedrive.SwerveSubsystem;
-import frc.robot.subsystems.swervedrive.Vision;
+import frc.robot.subsystems.SwerveSubsystem;
+import frc.robot.subsystems.Vision;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AimAtTargetCommand extends Command {
