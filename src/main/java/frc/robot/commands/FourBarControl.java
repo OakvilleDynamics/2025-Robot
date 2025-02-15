@@ -24,14 +24,23 @@ public class FourBarControl extends Command {
   // Controls for the Algae
 
   public void execute() {
-    if (BarJoystick.getRawButton(8)) {
+    if (BarJoystick.getRawButton(1)) {
       m_FourBarSubsystem.UpBar();
-      System.out.println("Four Bar Going Up");
-    } else if (BarJoystick.getRawButton(9)) {
+      System.out.println("Fourbar Up");
+    } else if (BarJoystick.getRawButton(2)) {
       m_FourBarSubsystem.DownBar();
-      System.out.println("Four Bar going down");
+      System.out.println("Fourbar Down");
+    } else if (BarJoystick.getRawButton(7)) {
+      m_FourBarSubsystem.L2();
+      System.out.println("Going to L2");
+    } else if (BarJoystick.getRawButton(8)) {
+      m_FourBarSubsystem.L3();
+      System.out.println("Going to L3");
+    } else if (BarJoystick.getRawButton(9)) {
+      m_FourBarSubsystem.L4();
+      System.out.println("Going to L4");
     } else {
-      m_FourBarSubsystem.StopFourBar();
+      m_FourBarSubsystem.disableFourBar();
     }
   }
 }

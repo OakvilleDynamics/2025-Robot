@@ -44,9 +44,10 @@ public final class Constants {
     public static final boolean ALGAE_INTAKE_2_INVERTED = false;
     public static final boolean FourBar_Inverted = false;
     public static final boolean Shooter_Inverted = false;
+    public static final boolean CAMinverted = false;
 
     // Motor Speeds for Algae
-    public static final double ALGAE_HINGE_SPEED = 0.1;
+    public static final double ALGAE_HINGE_SPEED = 0.05;
     public static final double ALGAE_INTAKE_SPEED = 0.5;
     public static final double ALGAE_SHOOT_FAST = 1;
 
@@ -54,6 +55,13 @@ public final class Constants {
     public static final double ShooterSpeed = .3;
 
     // Motor Speed for FourBar
-    public static final double FourBarSpeed = .4;
+    public static final double FourBarSpeed = .3;
+
+    // CAM motor IDs
+    public static final int CAMmotor1 = 7;
+    public static final int CAMmotor2 = 8;
+
+    // CAM motor speed
+    public static final double CAMspeed = .1;
   }
 }
