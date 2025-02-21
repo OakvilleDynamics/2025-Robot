@@ -17,7 +17,7 @@ public class Algae extends SubsystemBase {
    * motors - SparkMax Using sparkmaxes for every other motor because we are using the REV ecosystem
    */
   private final SparkMax AlgaeHinge =
-      new SparkMax(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushed);
+      new SparkMax(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushless);
 
   private final SparkFlex AlgaeIntake1 =
       new SparkFlex(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);

@@ -26,7 +26,7 @@ public class CAMcommand extends Command {
 
   public void execute() {
     if (CAMJoystick.getThrottle() >= 0.75) {
-      System.out.println("CLOSING CAM");
+      System.out.println("Closing CAM");
       m_CAMSubsystem.closeCAM();
       new WaitCommand(5.0);
       m_CAMSubsystem.stopCAM();

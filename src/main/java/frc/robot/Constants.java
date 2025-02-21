@@ -47,7 +47,7 @@ public final class Constants {
     public static final boolean CAMinverted = false;
 
     // Motor Speeds for Algae
-    public static final double ALGAE_HINGE_SPEED = 0.05;
+    public static final double ALGAE_HINGE_SPEED = 0.3;
     public static final double ALGAE_INTAKE_SPEED = 0.5;
     public static final double ALGAE_SHOOT_FAST = 1;
 
