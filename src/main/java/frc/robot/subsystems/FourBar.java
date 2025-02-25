@@ -31,11 +31,11 @@ public class FourBar extends SubsystemBase {
   // ClosedLoopSlot.kSlot0);
 
   public void UpBar() {
-    FourbarMotor.set(-MechanismConstants.FourBarSpeed);
+    FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
   public void DownBar() {
-    FourbarMotor.set(MechanismConstants.FourBarSpeed);
+    FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
   public void disableFourBar() {

@@ -17,6 +17,7 @@ public class CAM extends SubsystemBase {
     CAMmotor2.set(-MechanismConstants.CAMspeed);
   }
 
+  // Stops CAM motors
   public void stopCAM() {
     CAMmotor1.set(0);
     CAMmotor2.set(0);
