@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.misc.Alerts;
 import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.Shooter;
 
@@ -44,6 +45,18 @@ public class RobotContainer {
         "StopShooter", new InstantCommand(() -> shooter.disableShooter()));
 
     configureBindings();
+
+    if (BuildConstants.DIRTY == 1) {
+      Alerts.gitDirtyAlert.set(true);
+    }
+
+    if (BuildConstants.GIT_BRANCH != "main") {
+      if (BuildConstants.GIT_BRANCH.contains("event/")) {
+        Alerts.gitEventBranchAlert.set(true);
+      } else {
+        Alerts.gitMainBranchAlert.set(true);
+      }
+    }
   }
 
   /**
