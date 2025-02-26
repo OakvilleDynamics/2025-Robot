@@ -45,6 +45,13 @@ public final class Constants {
     public static final double kMAX_AUTO_SPEED = 0.5;
   }
 
+  public static final class VisionConstants {
+    public static final double VISION_DES_ANGLE_deg = 90.0;
+    public static final double VISION_DES_RANGE_m = 2.0;
+    public static final double VISION_STRAFE_kP = 0.01;
+    public static final double VISION_TURN_kP = 0.01;
+  }
+
   /** All driver and co-driver controls and settings */
   public static class OperatorConstants {
 
