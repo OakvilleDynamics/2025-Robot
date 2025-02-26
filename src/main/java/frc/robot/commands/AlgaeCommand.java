@@ -30,7 +30,7 @@ public class AlgaeCommand extends Command {
     } else if (algaeJoystick.getRawButton(4)) {
       m_AlgaeSubsystem.scoreAlgae();
       System.out.println("Scoring Algae");
-    } else if (algaeJoystick.getRawButton(7)) {
+    } else if (algaeJoystick.getRawButton(10)) {
       m_AlgaeSubsystem.shootAlgae();
       System.out.println("Shooting Algae");
     } else if (algaeJoystick.getRawButton(11)) {
