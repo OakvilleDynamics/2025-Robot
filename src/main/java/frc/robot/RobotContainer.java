@@ -50,7 +50,7 @@ public class RobotContainer {
       Alerts.gitDirtyAlert.set(true);
     }
 
-    if (BuildConstants.GIT_BRANCH != "main") {
+    if (BuildConstants.GIT_BRANCH.equals("main")) {
       if (BuildConstants.GIT_BRANCH.contains("event/")) {
         Alerts.gitEventBranchAlert.set(true);
       } else {
