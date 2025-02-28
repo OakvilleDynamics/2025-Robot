@@ -4,6 +4,10 @@
 
 package frc.robot;
 
+import edu.wpi.first.math.geometry.Translation3d;
+import edu.wpi.first.math.util.Units;
+import swervelib.math.Matter;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -14,6 +18,12 @@ package frc.robot;
  */
 public final class Constants {
 
+  public static final double kROBOT_MASS = (148 - 20.3) * 0.453592; // 32lbs * kg per pound
+  public static final Matter kCHASSIS =
+      new Matter(new Translation3d(0, 0, Units.inchesToMeters(8)), kROBOT_MASS);
+  public static final double kLOOP_TIME = 0.13; // s, 20ms + 110ms sprk max velocity lag
+  public static final double kMAX_SPEED = Units.feetToMeters(14.5);
+
   public static final class HardwareConstants {
     public static final int REV_PDH_ID = 1;
   }
@@ -21,6 +31,19 @@ public final class Constants {
   public static class OperatorConstants {
     public static final int DRIVER_CONTROLLER = 0;
     public static final int COPILOT_CONTROLLER = 1;
+
+    // Joystick Deadband
+    public static final double kDEADBAND = 0.1;
+    public static final double kLEFT_Y_DEADBAND = 0.1;
+    public static final double kRIGHT_X_DEADBAND = 0.1;
+    public static final double kTURN_CONSTANT = 6;
+  }
+
+  public static final class DrivebaseConstants {
+
+    // Hold time on motor brakes when disabled
+    public static final double kWHEEL_LOCK_TIME = 10; // seconds
+    public static final double kMAX_AUTO_SPEED = 0.5;
   }
 
   public static class MechanismConstants {
