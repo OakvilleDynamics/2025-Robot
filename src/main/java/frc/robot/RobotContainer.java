@@ -14,6 +14,7 @@ import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.CAMcommand;
 import frc.robot.commands.FourBarControl;
 import frc.robot.commands.ShooterCommand;
+import frc.robot.misc.Alerts;
 import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.CAM;
 import frc.robot.subsystems.FourBar;
@@ -52,6 +53,18 @@ public class RobotContainer {
     NamedCommands.registerCommand("L4", new InstantCommand(() -> fourbar.L4()));
 
     configureBindings();
+
+    if (BuildConstants.DIRTY == 1) {
+      Alerts.gitDirtyAlert.set(true);
+    }
+
+    if (BuildConstants.GIT_BRANCH.equals("main")) {
+      if (BuildConstants.GIT_BRANCH.contains("event/")) {
+        Alerts.gitEventBranchAlert.set(true);
+      } else {
+        Alerts.gitMainBranchAlert.set(true);
+      }
+    }
   }
 
   /**
