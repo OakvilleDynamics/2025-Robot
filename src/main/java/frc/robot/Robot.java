@@ -43,7 +43,7 @@ public class Robot extends LoggedRobot {
     m_robotContainer = new RobotContainer();
 
     // Log all robot metadata to AdvantageKit/AdvantageScope
-    Logger.recordMetadata("ProjectName", "2024-Robot");
+    Logger.recordMetadata("ProjectName", "2025-Robot");
     Logger.recordMetadata("RuntimeType", getRuntimeType().toString());
     Logger.recordMetadata("BuildDate", BuildConstants.BUILD_DATE);
     Logger.recordMetadata("GitSHA", BuildConstants.GIT_SHA);
