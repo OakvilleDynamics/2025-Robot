@@ -34,5 +34,5 @@
 
 ## Requirements
 
-- WPILib 2025.2.1
+- WPILib 2025.3.1
 - Internet connection (for Gradle to download dependencies)
