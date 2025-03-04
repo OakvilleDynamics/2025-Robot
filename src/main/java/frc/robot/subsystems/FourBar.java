@@ -19,16 +19,11 @@ public class FourBar extends SubsystemBase {
   private RelativeEncoder encoder = FourbarMotor.getEncoder();
   private SparkLimitSwitch forwardLimitSwitch = FourbarMotor.getForwardLimitSwitch();
   private SparkLimitSwitch reverseLimitSwitch = FourbarMotor.getReverseLimitSwitch();
-  private SparkMaxConfig FourbarConfig;
+  private SparkMaxConfig FourbarEncoderConfig;
 
-  // FourbarConfig = new SparkMaxConfig();
-
-  // FourbarConfig.encoder
-  // .positionConversionFactor(1)
+  // FourbarEncoderConfig.encoder
+  // .positionConversionFactor(1);
   // .velocityConversionFactor(1);
-  // double targetPosition = SmartDashboard.getNumber("Target Position", 0);
-  // closedLoopController.setReference(targetPosition, ControlType.kPosition,
-  // ClosedLoopSlot.kSlot0);
 
   public void UpBar() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);

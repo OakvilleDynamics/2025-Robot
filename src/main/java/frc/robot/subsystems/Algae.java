@@ -4,9 +4,12 @@
 
 package frc.robot.subsystems;
 
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkFlex;
+import com.revrobotics.spark.SparkLimitSwitch;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
@@ -23,6 +26,11 @@ public class Algae extends SubsystemBase {
       new SparkFlex(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
   private final SparkFlex AlgaeIntake2 =
       new SparkFlex(MechanismConstants.ALGAE_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
+
+  private RelativeEncoder encoder = AlgaeHinge.getEncoder();
+  private SparkLimitSwitch forwardLimitSwitch = AlgaeHinge.getForwardLimitSwitch();
+  private SparkLimitSwitch reverseLimitSwitch = AlgaeHinge.getReverseLimitSwitch();
+  private SparkMaxConfig AlgaeEncoderConfig;
 
   /** Intakes Algae */
   public void intakeAlgae() {
@@ -61,5 +69,17 @@ public class Algae extends SubsystemBase {
   public void shootAlgae() {
     AlgaeIntake1.set(-MechanismConstants.ALGAE_SHOOT_FAST);
     AlgaeIntake2.set(MechanismConstants.ALGAE_SHOOT_FAST);
+  }
+
+  public void defaultPosition() {
+    encoder.setPosition(0);
+  }
+
+  public void processorPosition() {
+    encoder.setPosition(0);
+  }
+
+  public void pickupPosition() {
+    encoder.setPosition(0);
   }
 }
