@@ -72,14 +72,14 @@ public class Algae extends SubsystemBase {
   }
 
   public void defaultPosition() {
-    encoder.setPosition(0);
+    AlgaeHinge.getEncoder().setPosition(0);
   }
 
   public void processorPosition() {
-    encoder.setPosition(0);
+    AlgaeHinge.getEncoder().setPosition(90);
   }
 
   public void pickupPosition() {
-    encoder.setPosition(0);
+    AlgaeHinge.getEncoder().setPosition(0);
   }
 }

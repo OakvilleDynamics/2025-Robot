@@ -25,7 +25,7 @@ public final class Constants {
   public static final double kMAX_SPEED = Units.feetToMeters(14.5);
 
   public static final class HardwareConstants {
-    public static final int REV_PDH_ID = 1;
+    public static final int REV_PDH_ID = 20;
   }
 
   public static class OperatorConstants {
@@ -51,15 +51,15 @@ public final class Constants {
     // Algae Mech Constants
 
     // Algae Motor IDs
-    public static final int ALGAE_INTAKE_1 = 2;
-    public static final int ALGAE_INTAKE_2 = 3;
-    public static final int ALGAE_HINGE = 4;
+    public static final int ALGAE_INTAKE_1 = 13;
+    public static final int ALGAE_INTAKE_2 = 14;
+    public static final int ALGAE_HINGE = 15;
 
     // Shooter Motor ID
-    public static final int ShooterMotor = 5;
+    public static final int ShooterMotor = 17;
 
     // Four Bar ID
-    public static final int FourbarMotor = 6;
+    public static final int FourbarMotor = 16;
 
     // Inverts
     public static final boolean ALGAE_HINGE_INVERTED = false;
@@ -81,8 +81,8 @@ public final class Constants {
     public static final double FourBarSpeed = .3;
 
     // CAM motor IDs
-    public static final int CAMmotor1 = 7;
-    public static final int CAMmotor2 = 8;
+    public static final int CAMmotor1 = 18;
+    public static final int CAMmotor2 = 19;
 
     // CAM motor speed
     public static final double CAMspeed = .1;
