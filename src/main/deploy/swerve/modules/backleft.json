@@ -1,7 +1,7 @@
 {
   "drive": {
     "type": "sparkflex_vortex",
-    "id": 6,
+    "id": 4,
     "canbus": null
   },
   "angle": {

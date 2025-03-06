@@ -1,7 +1,14 @@
 {
   "NTProvider": {
     "types": {
-      "/FMSInfo": "FMSInfo"
+      "/FMSInfo": "FMSInfo",
+      "/SmartDashboard/Alerts": "Alerts",
+      "/SmartDashboard/Encoders": "Alerts",
+      "/SmartDashboard/Field": "Field2d",
+      "/SmartDashboard/IMU": "Alerts",
+      "/SmartDashboard/JSON": "Alerts",
+      "/SmartDashboard/Motors": "Alerts",
+      "/SmartDashboard/Swerve Drive": "Alerts"
     }
   },
   "NetworkTables Info": {
