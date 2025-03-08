@@ -51,8 +51,8 @@ public final class Constants {
     // Algae Mech Constants
 
     // Algae Motor IDs
-    public static final int ALGAE_INTAKE_1 = 13;
-    public static final int ALGAE_INTAKE_2 = 14;
+    public static final int ALGAE_right = 14;
+    public static final int ALGAE_left = 13;
     public static final int ALGAE_HINGE = 15;
 
     // Shooter Motor ID
@@ -81,8 +81,8 @@ public final class Constants {
     public static final double FourBarSpeed = .3;
 
     // CAM motor IDs
-    public static final int CAMmotor1 = 18;
-    public static final int CAMmotor2 = 19;
+    public static final int CAMleft = 18;
+    public static final int CAMright = 19;
 
     // CAM motor speed
     public static final double CAMspeed = .1;

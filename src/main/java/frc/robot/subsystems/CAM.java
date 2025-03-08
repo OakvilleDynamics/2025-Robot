@@ -6,26 +6,27 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
 public class CAM extends SubsystemBase {
-  private final SparkMax CAMmotor1 =
-      new SparkMax(MechanismConstants.CAMmotor1, SparkLowLevel.MotorType.kBrushless);
+  private final SparkMax CAMright =
+      new SparkMax(MechanismConstants.CAMright, SparkLowLevel.MotorType.kBrushless);
 
-  private final SparkMax CAMmotor2 =
-      new SparkMax(MechanismConstants.CAMmotor2, SparkLowLevel.MotorType.kBrushless);
+  private final SparkMax CAMleft =
+      new SparkMax(MechanismConstants.CAMleft, SparkLowLevel.MotorType.kBrushless);
 
+  // Starts CAM motors to climb
   public void closeCAM() {
-    CAMmotor1.set(MechanismConstants.CAMspeed);
-    CAMmotor2.set(-MechanismConstants.CAMspeed);
+    CAMright.set(-MechanismConstants.CAMspeed);
+    CAMleft.set(MechanismConstants.CAMspeed);
   }
 
   // Stops CAM motors
   public void stopCAM() {
-    CAMmotor1.set(0);
-    CAMmotor2.set(0);
+    CAMright.set(0);
+    CAMleft.set(0);
   }
 
   // We shouldn't need this one but it is there if needed :)
   public void openCAM() {
-    CAMmotor1.set(-MechanismConstants.CAMspeed);
-    CAMmotor2.set(MechanismConstants.CAMspeed);
+    CAMright.set(MechanismConstants.CAMspeed);
+    CAMleft.set(-MechanismConstants.CAMspeed);
   }
 }

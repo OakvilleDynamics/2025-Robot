@@ -25,30 +25,38 @@ public class FourBar extends SubsystemBase {
   // .positionConversionFactor(1);
   // .velocityConversionFactor(1);
 
+
+  // Makes Fourbar go up manually
   public void UpBar() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
+  //Makes Fourbar go down manually
   public void DownBar() {
     FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
+  // Stops Fourbar motors
   public void disableFourBar() {
     FourbarMotor.set(0);
   }
 
+  // Automatically sets fourbar to deafault position to score L1
   public void L1() {
     encoder.setPosition(0);
   }
 
+  // Automatically sets fourbar to score L2
   public void L2() {
     encoder.setPosition(0);
   }
 
+  // Automatically sets fourbar to score L3
   public void L3() {
     encoder.setPosition(0);
   }
 
+  //Automatically set fourbar to score L4
   public void L4() {
     encoder.setPosition(0);
   }

@@ -22,10 +22,10 @@ public class Algae extends SubsystemBase {
   private final SparkMax AlgaeHinge =
       new SparkMax(MechanismConstants.ALGAE_HINGE, SparkLowLevel.MotorType.kBrushless);
 
-  private final SparkFlex AlgaeIntake1 =
-      new SparkFlex(MechanismConstants.ALGAE_INTAKE_1, SparkLowLevel.MotorType.kBrushless);
-  private final SparkFlex AlgaeIntake2 =
-      new SparkFlex(MechanismConstants.ALGAE_INTAKE_2, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgaeRight =
+      new SparkFlex(MechanismConstants.ALGAE_right, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex AlgaeLeft =
+      new SparkFlex(MechanismConstants.ALGAE_left, SparkLowLevel.MotorType.kBrushless);
 
   private RelativeEncoder encoder = AlgaeHinge.getEncoder();
   private SparkLimitSwitch forwardLimitSwitch = AlgaeHinge.getForwardLimitSwitch();
@@ -34,8 +34,8 @@ public class Algae extends SubsystemBase {
 
   /** Intakes Algae */
   public void intakeAlgae() {
-    AlgaeIntake1.set(MechanismConstants.ALGAE_INTAKE_SPEED);
-    AlgaeIntake2.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
+    AlgaeRight.set(MechanismConstants.ALGAE_INTAKE_SPEED);
+    AlgaeLeft.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
   }
 
   /** Makes hinge go up */
@@ -50,8 +50,8 @@ public class Algae extends SubsystemBase {
 
   /** Sets the Algae motors to 0% power */
   public void disableAlgae() {
-    AlgaeIntake1.set(0);
-    AlgaeIntake2.set(0);
+    AlgaeRight.set(0);
+    AlgaeLeft.set(0);
   }
 
   // Stops Algae Hinge
@@ -61,24 +61,27 @@ public class Algae extends SubsystemBase {
 
   /** Reverses Algae intake speed to score into processor */
   public void scoreAlgae() {
-    AlgaeIntake1.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
-    AlgaeIntake2.set(MechanismConstants.ALGAE_INTAKE_SPEED);
+    AlgaeRight.set(-MechanismConstants.ALGAE_INTAKE_SPEED);
+    AlgaeLeft.set(MechanismConstants.ALGAE_INTAKE_SPEED);
   }
 
   /** Releases Algae at higher power to score into the net */
   public void shootAlgae() {
-    AlgaeIntake1.set(-MechanismConstants.ALGAE_SHOOT_FAST);
-    AlgaeIntake2.set(MechanismConstants.ALGAE_SHOOT_FAST);
+    AlgaeRight.set(-MechanismConstants.ALGAE_SHOOT_FAST);
+    AlgaeLeft.set(MechanismConstants.ALGAE_SHOOT_FAST);
   }
 
+  // Automatically sets algae hinge to deafault position
   public void defaultPosition() {
     AlgaeHinge.getEncoder().setPosition(0);
   }
 
+  // Automatically sets algae hinge to score in processor
   public void processorPosition() {
     AlgaeHinge.getEncoder().setPosition(90);
   }
 
+  // Automatically set algae hinge to pickup algae
   public void pickupPosition() {
     AlgaeHinge.getEncoder().setPosition(0);
   }
