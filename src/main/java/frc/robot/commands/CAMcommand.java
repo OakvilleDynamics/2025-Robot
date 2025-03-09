@@ -30,10 +30,8 @@ public class CAMcommand extends Command {
       m_CAMSubsystem.closeCAM();
       new WaitCommand(5.0);
       m_CAMSubsystem.stopCAM();
-    }
-    else {
+    } else {
       m_CAMSubsystem.stopCAM();
     }
   }
 }
-
