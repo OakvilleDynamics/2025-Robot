@@ -36,7 +36,8 @@ public class FourBarControl extends Command {
     } else if (BarJoystick.getRawButton(8)) {
       m_FourBarSubsystem.L3();
       System.out.println("Going to L3");
-    } else if (BarJoystick.getRawButton(9)) {
+      // chagne to 9 maybe in the future
+    } else if (BarJoystick.getRawButton(7)) {
       m_FourBarSubsystem.L4();
       System.out.println("Going to L4");
     } else {
