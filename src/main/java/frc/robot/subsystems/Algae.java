@@ -10,6 +10,7 @@ import com.revrobotics.spark.SparkLimitSwitch;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
@@ -31,6 +32,8 @@ public class Algae extends SubsystemBase {
   private SparkLimitSwitch forwardLimitSwitch = AlgaeHinge.getForwardLimitSwitch();
   private SparkLimitSwitch reverseLimitSwitch = AlgaeHinge.getReverseLimitSwitch();
   private SparkMaxConfig AlgaeEncoderConfig;
+
+  private DutyCycleEncoder shaftEncoder = new DutyCycleEncoder(MechanismConstants.ALGAE_Encoder);
 
   /** Intakes Algae */
   public void intakeAlgae() {
@@ -84,5 +87,21 @@ public class Algae extends SubsystemBase {
   // Automatically set algae hinge to pickup algae
   public void pickupPosition() {
     AlgaeHinge.getEncoder().setPosition(0);
+  }
+
+  /**
+   * Get encoder position from the internal motor controller. This won't be the same as the shaft
+   * encoder position, as the motor controller has a gear ratio.
+   */
+  public double getInternalEncoderPosition() {
+    return encoder.getPosition();
+  }
+
+  /**
+   * This is the encoder position from the shaft encoder, connected to the DIO port on the RoboRIO,
+   * this is running as a duty cycle encoder, or absolute encoder.
+   */
+  public double getShaftEncoderPosition() {
+    return shaftEncoder.get();
   }
 }

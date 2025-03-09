@@ -1,6 +1,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.FourBar;
@@ -24,6 +25,8 @@ public class FourBarControl extends Command {
   // Controls for the Algae
 
   public void execute() {
+    SmartDashboard.putNumber("Shaft Encoder", m_FourBarSubsystem.getShaftEncoderPosition());
+    SmartDashboard.putNumber("Internal Encoder", m_FourBarSubsystem.getInternalEncoderPosition());
     if (BarJoystick.getRawButton(1)) {
       m_FourBarSubsystem.UpBar();
       System.out.println("Fourbar Up");

@@ -54,12 +54,14 @@ public final class Constants {
     public static final int ALGAE_right = 14;
     public static final int ALGAE_left = 13;
     public static final int ALGAE_HINGE = 15;
+    public static final int ALGAE_Encoder = 1;
 
     // Shooter Motor ID
     public static final int ShooterMotor = 17;
 
     // Four Bar ID
     public static final int FourbarMotor = 16;
+    public static final int FourbarEncoder = 0;
 
     // Inverts
     public static final boolean ALGAE_HINGE_INVERTED = false;
