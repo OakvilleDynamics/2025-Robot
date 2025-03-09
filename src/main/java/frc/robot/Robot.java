@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.PowerDistribution.ModuleType;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.Constants.HardwareConstants;
+import frc.robot.misc.Alerts;
 import java.nio.file.Paths;
 import org.littletonrobotics.junction.LoggedRobot;
 import org.littletonrobotics.junction.Logger;
@@ -68,12 +69,19 @@ public class Robot extends LoggedRobot {
       // Publish data to NetworkTables
       Logger.addDataReceiver(new NT4Publisher());
       if (Paths.get("/U").getParent() != null) {
+        if (Paths.get("/U").getParent().toFile().getUsableSpace() < 1e9) {
+          // Output driver station alerts if the storage device is critically low
+          Alerts.storageLowAlert.set(true);
+        }
         // Log data to U:/Logs
         Logger.addDataReceiver(new WPILOGWriter());
 
         // Start CTRE and REV hardware signal logging
         SignalLogger.start();
         Logger.registerURCL(URCL.startExternal());
+      } else {
+        // Output driver station alerts if the storage device is missing
+        Alerts.storageMissingAlert.set(true);
       }
     } else {
       // Run as fast as possible in simulation
