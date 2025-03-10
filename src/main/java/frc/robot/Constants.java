@@ -89,4 +89,26 @@ public final class Constants {
     // CAM motor speed
     public static final double CAMspeed = .1;
   }
+
+  public static final class FourbarConstants {
+    public static final int kStartingPosition = 0;
+    public static final int kCurrentLimit = 50;
+
+    public static final int kPositionConversionFactor = 360;
+    public static final int kVelocityConversionFactor = 1000;
+
+    public static final double kP = 10;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
+    public static final double kFwdSoftLimit = 3600;
+    public static final double kRevSoftLimit = -3600;
+
+    public static final double kPositionTolerance = 0.5;
+
+    public static final double L1 = 1000;
+    public static final double L2 = 2000;
+    public static final double L3 = 3000;
+    public static final double L4 = 360;
+  }
 }

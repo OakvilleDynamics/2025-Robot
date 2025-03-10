@@ -25,8 +25,10 @@ public class CAM extends SubsystemBase {
   }
 
   // We shouldn't need this one but it is there if needed :)
+  /*
   public void openCAM() {
-    CAMright.set(MechanismConstants.CAMspeed);
-    CAMleft.set(-MechanismConstants.CAMspeed);
+  CAMright.set(MechanismConstants.CAMspeed);
+  CAMleft.set(-MechanismConstants.CAMspeed);
   }
+  */
 }

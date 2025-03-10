@@ -1,4 +1,8 @@
--- Swerve Motors
+
+FRONT IS WHERE THE DOGHOUSE OPENS UP
+RIGHT IS WHERE THE ALGAE ARM IS
+
+-- Swerve Motors --
 
 - LF -
  
