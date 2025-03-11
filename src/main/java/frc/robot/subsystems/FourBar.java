@@ -104,8 +104,8 @@ public class FourBar extends SubsystemBase {
     SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
     SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
     SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
-    SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
     SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.get());
+    SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
     moveToSetpoint();
   }
 }
