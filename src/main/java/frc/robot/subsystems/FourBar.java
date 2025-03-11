@@ -30,8 +30,6 @@ public class FourBar extends SubsystemBase {
 
   private SparkClosedLoopController p_fourbar;
 
-  private SparkAbsoluteEncoder e_cal;
-
   private RelativeEncoder e_fourbar;
 
   private SparkMaxConfig c_fourbar;
@@ -40,13 +38,10 @@ public class FourBar extends SubsystemBase {
 
   public FourBar() {
 
-    // FourbarMotor.configure(c_fourbar, ResetMode.kResetSafeParameters,
-    // PersistMode.kPersistParameters);
-
     c_fourbar = Configs.FourbarConfig.FourbarConfig;
 
     FourbarMotor.configure(
-        c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+      c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_setpoint = FourbarConstants.kStartingPosition;
 
@@ -54,9 +49,7 @@ public class FourBar extends SubsystemBase {
 
     e_fourbar = FourbarMotor.getEncoder();
 
-    e_cal = FourbarMotor.getAbsoluteEncoder();
-
-    e_fourbar.setPosition(e_cal.getPosition());
+    e_fourbar.setPosition(shaftEncoder.get());
   }
 
   public boolean atTargetPosition() {
@@ -106,29 +99,13 @@ public class FourBar extends SubsystemBase {
   // Automatically set fourbar to score L4
   public void L4() {}
 
-  /**
-   * Get encoder position from the internal motor controller. This won't be the same as the shaft
-   * encoder position, as the motor controller has a gear ratio.
-   *
-   * @return encoder position from the motor
-   */
-  // public double getInternalEncoderPosition() {
-
-  /**
-   * This is the encoder position from the shaft encoder, connected to the DIO port on the RoboRIO,
-   * this is running as a duty cycle encoder, or absolute encoder.
-   *
-   * @return encoder position from the shaft
-   */
-  // public double getShaftEncoderPosition() {
   @Override
   public void periodic() { // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Calibrator Position", e_cal.getPosition());
-    SmartDashboard.putNumber("Calibrator Velocity", e_cal.getVelocity());
-    SmartDashboard.putNumber("Fourbar Position", e_fourbar.getPosition());
-    SmartDashboard.putNumber("Fourbar Velocity", e_fourbar.getVelocity());
-    SmartDashboard.putNumber("Setpoint", m_setpoint);
-    SmartDashboard.putBoolean("At Target", atTargetPosition());
+    SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
+    SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
+    SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
+    SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
+    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.get());
     moveToSetpoint();
   }
 }

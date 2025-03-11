@@ -92,7 +92,7 @@ public final class Constants {
 
   public static final class FourbarConstants {
     public static final int kStartingPosition = 0;
-    public static final int kCurrentLimit = 50;
+    public static final int kCurrentLimit = 40;
 
     public static final int kPositionConversionFactor = 360;
     public static final int kVelocityConversionFactor = 1000;
