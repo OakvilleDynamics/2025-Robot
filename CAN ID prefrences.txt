@@ -41,6 +41,7 @@ Shooter: 17
 -- CAM --
 Left: 18
 Right: 19
+Small: 21
 
 -- Misc --
 PDH: 20
