@@ -5,7 +5,6 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.RelativeEncoder;
-import com.revrobotics.spark.SparkAbsoluteEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
@@ -41,7 +40,7 @@ public class FourBar extends SubsystemBase {
     c_fourbar = Configs.FourbarConfig.FourbarConfig;
 
     FourbarMotor.configure(
-      c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+        c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_setpoint = FourbarConstants.kStartingPosition;
 
