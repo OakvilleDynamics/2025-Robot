@@ -24,10 +24,10 @@ public class ShooterCommand extends Command {
   // Controls for Shooter Mech
 
   public void execute() {
-    if (coralJoystick.getRawButton(5)) {
+    if (coralJoystick.getRawButton(3)) {
       m_ShooterSubsystem.intakeCoral();
       System.out.println("Intaking Coral");
-    } else if (coralJoystick.getRawButton(6)) {
+    } else if (coralJoystick.getRawButton(4)) {
       m_ShooterSubsystem.shootCoral();
       System.out.println("Shooting Coral");
     } else {
