@@ -2,7 +2,6 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.subsystems.CAM;
 
@@ -25,11 +24,13 @@ public class CAMcommand extends Command {
   // Controls for Shooter Mech
 
   public void execute() {
-    if (CAMJoystick.getThrottle() >= 0.75) {
+    if (CAMJoystick.getRawButton(9)) {
       System.out.println("Closing CAM");
       m_CAMSubsystem.closeCAM();
+      /*
       new WaitCommand(5.0);
       m_CAMSubsystem.stopCAM();
+      */
     } else {
       m_CAMSubsystem.stopCAM();
     }

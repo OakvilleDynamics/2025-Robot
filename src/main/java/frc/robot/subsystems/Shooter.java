@@ -19,7 +19,7 @@ public class Shooter extends SubsystemBase {
     ShooterMotor.set(-MechanismConstants.ShooterSpeed);
   }
 
-  // Shoot Coral
+  // Shoots Coral
   public void shootCoral() {
     ShooterMotor.set(MechanismConstants.ShooterSpeed);
   }

@@ -1,0 +1,47 @@
+
+FRONT IS WHERE THE DOGHOUSE OPENS UP
+RIGHT IS WHERE THE ALGAE ARM IS
+
+-- Swerve Motors --
+
+- LF -
+ 
+Turning: 1
+Driving: 2
+CAN Coder: 9
+
+- LB -
+ 
+Turning: 3
+Driving: 4
+CAN Coder: 10
+
+- RF -
+ 
+Turning: 5
+Driving: 6
+CAN Coder: 11
+
+- RB -
+ 
+Turning: 7
+Driving: 8
+CAN Coder: 12
+
+-- Algae --
+
+Intake Left: 13
+Intake Right: 14
+Hinge: 15
+
+-- Fourbar --
+Bar Motor: 16
+Shooter: 17
+
+-- CAM --
+Left: 18
+Right: 19
+Small: 21
+
+-- Misc --
+PDH: 20

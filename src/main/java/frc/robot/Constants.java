@@ -25,7 +25,7 @@ public final class Constants {
   public static final double kMAX_SPEED = Units.feetToMeters(14.5);
 
   public static final class HardwareConstants {
-    public static final int REV_PDH_ID = 1;
+    public static final int REV_PDH_ID = 20;
   }
 
   public static class OperatorConstants {
@@ -51,15 +51,17 @@ public final class Constants {
     // Algae Mech Constants
 
     // Algae Motor IDs
-    public static final int ALGAE_INTAKE_1 = 2;
-    public static final int ALGAE_INTAKE_2 = 3;
-    public static final int ALGAE_HINGE = 4;
+    public static final int ALGAE_right = 14;
+    public static final int ALGAE_left = 13;
+    public static final int ALGAE_HINGE = 15;
+    public static final int ALGAE_Encoder = 1;
 
     // Shooter Motor ID
-    public static final int ShooterMotor = 5;
+    public static final int ShooterMotor = 17;
 
     // Four Bar ID
-    public static final int FourbarMotor = 6;
+    public static final int FourbarMotor = 16;
+    public static final int FourbarEncoder = 0;
 
     // Inverts
     public static final boolean ALGAE_HINGE_INVERTED = false;
@@ -70,7 +72,7 @@ public final class Constants {
     public static final boolean CAMinverted = false;
 
     // Motor Speeds for Algae
-    public static final double ALGAE_HINGE_SPEED = 0.3;
+    public static final double ALGAE_HINGE_SPEED = 0.2;
     public static final double ALGAE_INTAKE_SPEED = 0.5;
     public static final double ALGAE_SHOOT_FAST = 1;
 
@@ -81,10 +83,33 @@ public final class Constants {
     public static final double FourBarSpeed = .3;
 
     // CAM motor IDs
-    public static final int CAMmotor1 = 7;
-    public static final int CAMmotor2 = 8;
+    public static final int CAMleft = 18;
+    public static final int CAMright = 19;
+    public static final int CAMsmall = 21;
 
     // CAM motor speed
     public static final double CAMspeed = .1;
+  }
+
+  public static final class FourbarConstants {
+    public static final int kStartingPosition = 0;
+    public static final int kCurrentLimit = 40;
+
+    public static final int kPositionConversionFactor = 360;
+    public static final int kVelocityConversionFactor = 1000;
+
+    public static final double kP = 10;
+    public static final double kI = 0;
+    public static final double kD = 0;
+
+    public static final double kFwdSoftLimit = 3600;
+    public static final double kRevSoftLimit = -3600;
+
+    public static final double kPositionTolerance = 0.5;
+
+    public static final double L1 = 1000;
+    public static final double L2 = 2000;
+    public static final double L3 = 3000;
+    public static final double L4 = 360;
   }
 }
