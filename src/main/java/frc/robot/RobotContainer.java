@@ -29,6 +29,7 @@ import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 import swervelib.SwerveInputStream;
 
 /**
@@ -194,31 +195,34 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-  
+
+    LoggedDashboardChooser autoChooser = new LoggedDashboardChooser<>("Auto-Chooser");
+
     // An example command will be run in autonomous
+    // return drivebase.getAutonomousCommand("Straight");
+
+    if (autoChooser.get() == null) {
+      doNothing();
+    }
+    // An example command will be run in autonomous
+    if (autoChooser.get() == null) {
+      return doNothing();
+    }
+    // return drivebase.getAutonomousCommand(autoChooser.get().getName());
     return drivebase.getAutonomousCommand("Straight");
   }
-    /*  if (autoChooser.get() == null) {
-        doNothing();
-      }
-      // An example command will be run in autonomous
-      if (autoChooser.get() == null) {
-        return doNothing();
-      }
-      return drivebase.getAutonomousCommand(autoChooser.get().getName());
-    }
 
-    public void setDriveMode() {
-      // drivebase.setDefaultCommand();
-    }
-
-    public void setMotorBrake(boolean brake) {
-      drivebase.setMotorBrake(brake);
-    }
-
-    public Command doNothing() {
-      Command nothing = new InstantCommand();
-      nothing.setName("NOTHING");
-      return nothing;
-    } */
+  public void setDriveMode() {
+    // drivebase.setDefaultCommand();
   }
+
+  public void setMotorBrake(boolean brake) {
+    drivebase.setMotorBrake(brake);
+  }
+
+  public Command doNothing() {
+    Command nothing = new InstantCommand();
+    nothing.setName("NOTHING");
+    return nothing;
+  }
+}
