@@ -25,7 +25,7 @@ public class CAMcommand extends Command {
 
   public void execute() {
     if (CAMJoystick.getRawButton(12)) {
-      System.out.println("Closing CAM");
+      //System.out.println("Closing CAM");
       m_CAMSubsystem.closeCAM();
       /*
       new WaitCommand(5.0);

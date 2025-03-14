@@ -29,20 +29,20 @@ public class FourBarControl extends Command {
     // m_FourBarSubsystem.getInternalEncoderPosition());
     if (BarJoystick.getRawButton(1)) {
       m_FourBarSubsystem.UpBar();
-      System.out.println("Fourbar Up");
+      //System.out.println("Fourbar Up");
     } else if (BarJoystick.getRawButton(2)) {
       m_FourBarSubsystem.DownBar();
-      System.out.println("Fourbar Down");
+      //System.out.println("Fourbar Down");
     } else if (BarJoystick.getRawButton(9)) {
       m_FourBarSubsystem.L2();
-      System.out.println("Going to L2");
+      //System.out.println("Going to L2");
     } else if (BarJoystick.getRawButton(10)) {
       m_FourBarSubsystem.L3();
-      System.out.println("Going to L3");
+      //System.out.println("Going to L3");
       // chagne to 9 maybe in the future
     } else if (BarJoystick.getRawButton(11)) {
       m_FourBarSubsystem.L4();
-      System.out.println("Going to L4");
+      //System.out.println("Going to L4");
     } else {
       m_FourBarSubsystem.disableFourBar();
     }

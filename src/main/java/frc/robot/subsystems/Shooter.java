@@ -6,6 +6,9 @@ package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
+
+import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
@@ -20,12 +23,12 @@ public class Shooter extends SubsystemBase {
   }
 
   // Shoots Coral
-  public void shootCoral() {
-    ShooterMotor.set(MechanismConstants.ShooterSpeed);
+  public Command shootCoral() {
+    return Commands.run(() -> ShooterMotor.set(MechanismConstants.ShooterSpeed));
   }
 
-  public void holdCoral() {
-    ShooterMotor.set(-MechanismConstants.SlowShooter);
+  public Command holdCoral() {
+    return Commands.runOnce(() -> ShooterMotor.set(-MechanismConstants.SlowShooter));
   }
 
   // Disables motor
