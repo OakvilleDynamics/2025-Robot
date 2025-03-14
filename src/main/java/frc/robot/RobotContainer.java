@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
@@ -43,6 +44,8 @@ public class RobotContainer {
   CommandXboxController driverXbox = new CommandXboxController(0);
   CommandJoystick driverController = new CommandJoystick(1);
 
+  LoggedDashboardChooser autoChooser = new LoggedDashboardChooser("AutoChooser");
+
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
@@ -66,10 +69,6 @@ public class RobotContainer {
           .copy()
           .withControllerHeadingAxis(driverXbox::getRightX, driverXbox::getRightY)
           .headingWhile(true);
-
-  /** Clone's the angular velocity input stream and converts it to a robotRelative input stream. */
-  SwerveInputStream driveRobotOriented =
-      driveAngularVelocity.copy().robotRelative(true).allianceRelativeControl(false);
 
   SwerveInputStream driveAngularVelocityKeyboard =
       SwerveInputStream.of(
@@ -123,6 +122,10 @@ public class RobotContainer {
         Alerts.gitMainBranchAlert.set(true);
       }
     }
+
+    autoChooser =
+        new LoggedDashboardChooser<Command>("Autonomous Chooser", AutoBuilder.buildAutoChooser());
+    autoChooser.addDefaultOption("Nothing", nothing);
   }
 
   /**
@@ -140,16 +143,9 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
-    Command driveRobotOrientedAngularVelocity = drivebase.driveFieldOriented(driveRobotOriented);
-    Command driveSetpointGen = drivebase.driveWithSetpointGeneratorFieldRelative(driveDirectAngle);
     Command driveFieldOrientedDirectAngleKeyboard =
         drivebase.driveFieldOriented(driveDirectAngleKeyboard);
-    Command driveFieldOrientedAnglularVelocityKeyboard =
-        drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
-    Command driveSetpointGenKeyboard =
-        drivebase.driveWithSetpointGeneratorFieldRelative(driveDirectAngleKeyboard);
 
     if (RobotBase.isSimulation()) {
       drivebase.setDefaultCommand(driveFieldOrientedDirectAngleKeyboard);
@@ -176,7 +172,7 @@ public class RobotContainer {
       driverXbox.rightBumper().onTrue(Commands.none());
     } else {
       driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      // driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
       driverXbox
           .b()
           .whileTrue(
@@ -232,4 +228,6 @@ public class RobotContainer {
     nothing.setName("NOTHING");
     return nothing;
   }
+
+  public Command nothing = Commands.none();
 }
