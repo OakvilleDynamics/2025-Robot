@@ -201,13 +201,13 @@ public class RobotContainer {
     // An example command will be run in autonomous
     // return drivebase.getAutonomousCommand("Straight");
 
-    if (autoChooser.get() == null) {
+    /* if (autoChooser.get() == null) {
       doNothing();
     }
     // An example command will be run in autonomous
     if (autoChooser.get() == null) {
       return doNothing();
-    }
+    } */
     // return drivebase.getAutonomousCommand(autoChooser.get().getName());
     return drivebase.getAutonomousCommand("Straight");
   }
