@@ -53,8 +53,8 @@ public class RobotContainer {
   SwerveInputStream driveAngularVelocity =
       SwerveInputStream.of(
               drivebase.getSwerveDrive(),
-              () -> driverXbox.getLeftY() * -1,
-              () -> driverXbox.getLeftX() * -1)
+              () -> driverXbox.getLeftY() * -0.8,
+              () -> driverXbox.getLeftX() * -0.8)
           .withControllerRotationAxis(() -> -driverXbox.getRightX())
           .deadband(OperatorConstants.kDEADBAND)
           .scaleTranslation(0.8)
@@ -209,7 +209,7 @@ public class RobotContainer {
       return doNothing();
     } */
     // return drivebase.getAutonomousCommand(autoChooser.get().getName());
-    return drivebase.getAutonomousCommand("Straight");
+    return drivebase.driveCommand(() -> 0.5, () -> 0, () -> 0).repeatedly().withTimeout(4);
   }
 
   public void setDriveMode() {
