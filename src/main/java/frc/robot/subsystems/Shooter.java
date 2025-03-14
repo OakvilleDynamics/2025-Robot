@@ -24,6 +24,10 @@ public class Shooter extends SubsystemBase {
     ShooterMotor.set(MechanismConstants.ShooterSpeed);
   }
 
+  public void holdCoral() {
+    ShooterMotor.set(-MechanismConstants.SlowShooter);
+  }
+
   // Disables motor
   public void disableShooter() {
     ShooterMotor.set(0);

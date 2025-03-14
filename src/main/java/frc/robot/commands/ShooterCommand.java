@@ -31,7 +31,7 @@ public class ShooterCommand extends Command {
       m_ShooterSubsystem.shootCoral();
       System.out.println("Shooting Coral");
     } else {
-      m_ShooterSubsystem.disableShooter();
+      m_ShooterSubsystem.holdCoral();
     }
   }
 }
