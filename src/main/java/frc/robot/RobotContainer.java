@@ -5,6 +5,8 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.NamedCommands;
+import com.pathplanner.lib.commands.PathPlannerAuto;
+import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
@@ -195,6 +197,30 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto");
+    //return drivebase.getAutonomousCommand("New Auto");
+   /*  if (autoChooser.get() == null) {
+      doNothing();
+    }
+    // An example command will be run in autonomous
+    if (autoChooser.get() == null) {
+      return doNothing();
+    }
+    return drivebase.getAutonomousCommand(autoChooser.get().getName());
+  }
+
+  public void setDriveMode() {
+    // drivebase.setDefaultCommand();
+  }
+
+  public void setMotorBrake(boolean brake) {
+    drivebase.setMotorBrake(brake);
+  }
+
+  public Command doNothing() {
+    Command nothing = new InstantCommand();
+    nothing.setName("NOTHING");
+    return nothing;
+  } */
   }
 }
+
