@@ -29,19 +29,19 @@ public class AlgaeCommand extends Command {
     SmartDashboard.putNumber("Internal Encoder", m_AlgaeSubsystem.getInternalEncoderPosition());
     if (algaeJoystick.getRawButton(5)) {
       m_AlgaeSubsystem.intakeAlgae();
-      //System.out.println("Algae taking in");
+      // System.out.println("Algae taking in");
     } else if (algaeJoystick.getRawButton(6)) {
       m_AlgaeSubsystem.scoreAlgae();
-      //System.out.println("Scoring Algae");
+      // System.out.println("Scoring Algae");
       /* } else if (algaeJoystick.getRawButton(10)) {
       m_AlgaeSubsystem.shootAlgae(); */
-      //System.out.println("Shooting Algae");
+      // System.out.println("Shooting Algae");
     } else if (algaeJoystick.getRawButton(8)) {
       m_AlgaeSubsystem.UpAlgae();
-      //System.out.println("Algae going up");
+      // System.out.println("Algae going up");
     } else if (algaeJoystick.getRawButton(7)) {
       m_AlgaeSubsystem.DownAlgae();
-      //System.out.println("Algae going down");
+      // System.out.println("Algae going down");
     } else {
       m_AlgaeSubsystem.disableAlgae();
       m_AlgaeSubsystem.disablehinge();

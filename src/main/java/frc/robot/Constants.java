@@ -77,7 +77,7 @@ public final class Constants {
     public static final double ALGAE_SHOOT_FAST = 1;
 
     // Motor speed for Shooter
-    public static final double ShooterSpeed = .3;
+    public static final double ShooterSpeed = -.3;
     public static final double SlowShooter = .15;
 
     // Motor Speed for FourBar

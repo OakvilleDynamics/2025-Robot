@@ -26,10 +26,10 @@ public class ShooterCommand extends Command {
   public void execute() {
     if (coralJoystick.getRawButton(3)) {
       m_ShooterSubsystem.intakeCoral();
-      //System.out.println("Intaking Coral");
+      // System.out.println("Intaking Coral");
     } else if (coralJoystick.getRawButton(4)) {
       m_ShooterSubsystem.shootCoral();
-      //System.out.println("Shooting Coral");
+      // System.out.println("Shooting Coral");
     } else {
       m_ShooterSubsystem.holdCoral();
     }
