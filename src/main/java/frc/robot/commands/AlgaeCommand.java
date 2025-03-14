@@ -36,10 +36,10 @@ public class AlgaeCommand extends Command {
       /* } else if (algaeJoystick.getRawButton(10)) {
       m_AlgaeSubsystem.shootAlgae(); */
       System.out.println("Shooting Algae");
-    } else if (algaeJoystick.getRawButton(7)) {
+    } else if (algaeJoystick.getRawButton(8)) {
       m_AlgaeSubsystem.UpAlgae();
       System.out.println("Algae going up");
-    } else if (algaeJoystick.getRawButton(8)) {
+    } else if (algaeJoystick.getRawButton(7)) {
       m_AlgaeSubsystem.DownAlgae();
       System.out.println("Algae going down");
     } else {
