@@ -192,8 +192,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
 
-    LoggedDashboardChooser autoChooser = new LoggedDashboardChooser<>("Auto-Chooser");
-
     // An example command will be run in autonomous
     // return drivebase.getAutonomousCommand("Straight");
 
@@ -210,9 +208,9 @@ public class RobotContainer {
         .repeatedly()
         .withTimeout(4)
         .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0));
-       // .andThen(shooter.shootCoral())
-       // .withTimeout(2)
-       // .andThen(shooter.holdCoral());
+    // .andThen(shooter.shootCoral())
+    // .withTimeout(2)
+    // .andThen(shooter.holdCoral());
   }
 
   public void setDriveMode() {
