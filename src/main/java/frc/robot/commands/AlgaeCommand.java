@@ -27,23 +27,26 @@ public class AlgaeCommand extends Command {
   public void execute() {
     SmartDashboard.putNumber("Shaft Encoder", m_AlgaeSubsystem.getShaftEncoderPosition());
     SmartDashboard.putNumber("Internal Encoder", m_AlgaeSubsystem.getInternalEncoderPosition());
-    if (algaeJoystick.getRawButton(5)) {
+
+    // Shoot or intake the algae based on the buttons pressed
+    if (algaeJoystick.getTrigger()) {
+      // Shoot the algae if the trigger is pressed
+      m_AlgaeSubsystem.shootAlgae();
+    } else if (algaeJoystick.getTop()) {
+      // Intake the algae if the top button is pressed
       m_AlgaeSubsystem.intakeAlgae();
-      System.out.println("Algae taking in");
-    } else if (algaeJoystick.getRawButton(6)) {
-      m_AlgaeSubsystem.scoreAlgae();
-      System.out.println("Scoring Algae");
-      /* } else if (algaeJoystick.getRawButton(10)) {
-      m_AlgaeSubsystem.shootAlgae(); */
-      System.out.println("Shooting Algae");
-    } else if (algaeJoystick.getRawButton(7)) {
-      m_AlgaeSubsystem.UpAlgae();
-      System.out.println("Algae going up");
-    } else if (algaeJoystick.getRawButton(8)) {
-      m_AlgaeSubsystem.DownAlgae();
-      System.out.println("Algae going down");
     } else {
       m_AlgaeSubsystem.disableAlgae();
+    }
+
+    // Move the algae hinge up or down based on the buttons pressed
+    if (algaeJoystick.getRawButton(3)) {
+      // Button 3 is used to move the algae down
+      m_AlgaeSubsystem.DownAlgae();
+    } else if (algaeJoystick.getRawButton(5)) {
+      // Button 5 is used to move the algae up
+      m_AlgaeSubsystem.UpAlgae();
+    } else {
       m_AlgaeSubsystem.disablehinge();
     }
   }
@@ -51,7 +54,6 @@ public class AlgaeCommand extends Command {
   @Override
   public void end(boolean interrupted) {
     m_AlgaeSubsystem.disableAlgae();
-    m_AlgaeSubsystem.intakeAlgae();
   }
 
   @Override
