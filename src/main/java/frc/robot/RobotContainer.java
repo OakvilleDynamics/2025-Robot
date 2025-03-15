@@ -207,10 +207,11 @@ public class RobotContainer {
         .driveCommand(() -> -0.5, () -> 0, () -> 0)
         .repeatedly()
         .withTimeout(4)
-        .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0));
-    // .andThen(shooter.shootCoral())
-    // .withTimeout(2)
-    // .andThen(shooter.holdCoral());
+        .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
+        .withTimeout(1)
+        .andThen(shooter.AutoShoot())
+        .withTimeout(2)
+        .andThen(shooter.AutoStop());
   }
 
   public void setDriveMode() {
