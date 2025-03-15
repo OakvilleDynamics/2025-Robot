@@ -206,7 +206,7 @@ public class RobotContainer {
     return drivebase
         .driveCommand(() -> -0.5, () -> 0, () -> 0)
         .repeatedly()
-        .withTimeout(4)
+        .withTimeout(2)
         .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
         .andThen(shooter.AutoShoot());
   }
