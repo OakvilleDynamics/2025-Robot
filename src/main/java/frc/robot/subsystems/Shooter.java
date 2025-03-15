@@ -22,8 +22,8 @@ public class Shooter extends SubsystemBase {
   }
 
   // Shoots Coral
-  public Command shootCoral() {
-    return Commands.run(() -> ShooterMotor.set(MechanismConstants.ShooterSpeed));
+  public void shootCoral() {
+    ShooterMotor.set(MechanismConstants.ShooterSpeed);
   }
 
   public Command holdCoral() {

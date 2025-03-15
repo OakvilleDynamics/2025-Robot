@@ -78,7 +78,7 @@ public final class Constants {
 
     // Motor speed for Shooter
     public static final double ShooterSpeed = .3;
-    public static final double SlowShooter = .15;
+    public static final double SlowShooter = .1;
 
     // Motor Speed for FourBar
     public static final double FourBarSpeed = .3;
