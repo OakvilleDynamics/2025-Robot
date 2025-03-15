@@ -208,9 +208,7 @@ public class RobotContainer {
         .repeatedly()
         .withTimeout(4)
         .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
-        .andThen(shooter.AutoShoot())
-        .withTimeout(2)
-        .andThen(shooter.AutoStop());
+        .andThen(shooter.AutoShoot());
   }
 
   public void setDriveMode() {
