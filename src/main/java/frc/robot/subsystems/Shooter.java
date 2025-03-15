@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public Command AutoShoot() {
-    return Commands.runOnce(() -> ShooterMotor.set(MechanismConstants.ShooterSpeed));
+    return Commands.run(() -> ShooterMotor.set(MechanismConstants.ShooterSpeed));
   }
 
   public Command AutoStop() {
