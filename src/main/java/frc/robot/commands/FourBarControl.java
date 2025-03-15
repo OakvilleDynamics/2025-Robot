@@ -32,8 +32,8 @@ public class FourBarControl extends Command {
     // Check inversion of the joystick to ensure proper mechanism control
     m_FourBarSubsystem.setFourbarSpeedClamped(BarJoystick.getX());
     /**
-     * This is the old code that was used to control the fourbar, it only serves as a reference
-     * for new code an also to showcase how to use the SmartDashboard to display information
+     * This is the old code that was used to control the fourbar, it only serves as a reference for
+     * new code an also to showcase how to use the SmartDashboard to display information
      * SmartDashboard does not slow down the robot code, so it is safe to use it to display
      * information instead of using System.out.println()
      */
