@@ -17,24 +17,6 @@
           }
         },
         {
-          "type": "named",
-          "data": {
-            "name": "L2"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "ShootCoral"
-          }
-        },
-        {
           "type": "wait",
           "data": {
             "waitTime": 1.0
@@ -43,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "Reset Curve - Blue Coral"
+            "pathName": "Reset Curve - Middle Straight"
           }
         }
       ]

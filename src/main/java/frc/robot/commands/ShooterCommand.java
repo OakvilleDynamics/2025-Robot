@@ -35,7 +35,6 @@ public class ShooterCommand extends Command {
       shooterActivity = "Shooting Coral";
     } else {
       m_ShooterSubsystem.disableShooter();
-
     }
     SmartDashboard.putString("Shooter", shooterActivity);
   }
