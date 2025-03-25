@@ -4,13 +4,13 @@
 
 package frc.robot;
 
+import com.pathplanner.lib.auto.AutoBuilder;
 import com.pathplanner.lib.auto.NamedCommands;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Filesystem;
-import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -29,6 +29,7 @@ import frc.robot.subsystems.FourBar;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 import swervelib.SwerveInputStream;
 
 /**
@@ -42,6 +43,8 @@ public class RobotContainer {
   CommandXboxController driverXbox = new CommandXboxController(0);
   CommandJoystick driverController = new CommandJoystick(1);
 
+  LoggedDashboardChooser autoChooser = new LoggedDashboardChooser("AutoChooser");
+
   private final SwerveSubsystem drivebase =
       new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
@@ -52,9 +55,23 @@ public class RobotContainer {
   SwerveInputStream driveAngularVelocity =
       SwerveInputStream.of(
               drivebase.getSwerveDrive(),
-              () -> driverXbox.getLeftY() * -1,
-              () -> driverXbox.getLeftX() * -1)
-          .withControllerRotationAxis(driverXbox::getRightX)
+              () -> driverXbox.getLeftY() * -0.8,
+              () -> driverXbox.getLeftX() * -0.8)
+          .withControllerRotationAxis(() -> -driverXbox.getRightX())
+          .deadband(OperatorConstants.kDEADBAND)
+          .scaleTranslation(0.8)
+          .allianceRelativeControl(true);
+
+  /**
+   * Same as driveAngularVelocity, but slower full outputs at 50% speed. This is used for more
+   * precise control.
+   */
+  SwerveInputStream driveAngularVelocitySlowed =
+      SwerveInputStream.of(
+              drivebase.getSwerveDrive(),
+              () -> driverXbox.getLeftY() * -0.5,
+              () -> driverXbox.getLeftX() * -0.5)
+          .withControllerRotationAxis(() -> -driverXbox.getRightX())
           .deadband(OperatorConstants.kDEADBAND)
           .scaleTranslation(0.8)
           .allianceRelativeControl(true);
@@ -65,10 +82,6 @@ public class RobotContainer {
           .copy()
           .withControllerHeadingAxis(driverXbox::getRightX, driverXbox::getRightY)
           .headingWhile(true);
-
-  /** Clone's the angular velocity input stream and converts it to a robotRelative input stream. */
-  SwerveInputStream driveRobotOriented =
-      driveAngularVelocity.copy().robotRelative(true).allianceRelativeControl(false);
 
   SwerveInputStream driveAngularVelocityKeyboard =
       SwerveInputStream.of(
@@ -122,6 +135,10 @@ public class RobotContainer {
         Alerts.gitMainBranchAlert.set(true);
       }
     }
+
+    autoChooser =
+        new LoggedDashboardChooser<Command>("Autonomous Chooser", AutoBuilder.buildAutoChooser());
+    autoChooser.addDefaultOption("Nothing", nothing);
   }
 
   /**
@@ -139,22 +156,13 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
-    Command driveFieldOrientedDirectAngle = drivebase.driveFieldOriented(driveDirectAngle);
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
-    Command driveRobotOrientedAngularVelocity = drivebase.driveFieldOriented(driveRobotOriented);
-    Command driveSetpointGen = drivebase.driveWithSetpointGeneratorFieldRelative(driveDirectAngle);
+    Command driveFieldOrientedAnglularVelocitySlowed =
+        drivebase.driveFieldOriented(driveAngularVelocitySlowed);
     Command driveFieldOrientedDirectAngleKeyboard =
         drivebase.driveFieldOriented(driveDirectAngleKeyboard);
-    Command driveFieldOrientedAnglularVelocityKeyboard =
-        drivebase.driveFieldOriented(driveAngularVelocityKeyboard);
-    Command driveSetpointGenKeyboard =
-        drivebase.driveWithSetpointGeneratorFieldRelative(driveDirectAngleKeyboard);
 
-    if (RobotBase.isSimulation()) {
-      drivebase.setDefaultCommand(driveFieldOrientedDirectAngleKeyboard);
-    } else {
-      drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocity);
-    }
+    drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocitySlowed);
 
     if (Robot.isSimulation()) {
       driverXbox
@@ -175,7 +183,7 @@ public class RobotContainer {
       driverXbox.rightBumper().onTrue(Commands.none());
     } else {
       driverXbox.a().onTrue((Commands.runOnce(drivebase::zeroGyro)));
-      driverXbox.x().onTrue(Commands.runOnce(drivebase::addFakeVisionReading));
+      driverXbox.x().whileTrue(drivebase.driveFieldOriented(driveAngularVelocity));
       driverXbox
           .b()
           .whileTrue(
@@ -194,7 +202,33 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
+
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto");
+    // return drivebase.getAutonomousCommand("Straight");
+
+    /* if (autoChooser.get() == null) {
+      doNothing();
+    }
+    // An example command will be run in autonomous
+    if (autoChooser.get() == null) {
+      return doNothing();
+    } */
+    // return drivebase.getAutonomousCommand(autoChooser.get().getName());
+    return drivebase
+        .driveCommand(() -> -0.5, () -> 0, () -> 0)
+        .repeatedly()
+        .withTimeout(2)
+        .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
+        .andThen(shooter.AutoShoot());
   }
+
+  public void setDriveMode() {
+    // drivebase.setDefaultCommand();
+  }
+
+  public void setMotorBrake(boolean brake) {
+    drivebase.setMotorBrake(brake);
+  }
+
+  public Command nothing = Commands.none();
 }

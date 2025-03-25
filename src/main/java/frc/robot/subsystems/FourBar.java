@@ -12,6 +12,7 @@ import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
+import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -98,8 +99,19 @@ public class FourBar extends SubsystemBase {
   // Automatically set fourbar to score L4
   public void L4() {}
 
+  /**
+   * Set the speed of the fourbar motor, clamped to the maximum speed.
+   *
+   * @param speed Clamped speed to set the fourbar motor to
+   */
+  public void setFourbarSpeedClamped(double speed) {
+    FourbarMotor.set(
+        MathUtil.clamp(speed, -MechanismConstants.FourBarSpeed, MechanismConstants.FourBarSpeed));
+  }
+
   @Override
   public void periodic() { // This method will be called once per scheduler run
+    SmartDashboard.putNumber("Fourbar/Motor Speed", FourbarMotor.get());
     SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
     SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
     SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);

@@ -78,6 +78,7 @@ public final class Constants {
 
     // Motor speed for Shooter
     public static final double ShooterSpeed = .3;
+    public static final double SlowShooter = .1;
 
     // Motor Speed for FourBar
     public static final double FourBarSpeed = .3;
@@ -85,7 +86,6 @@ public final class Constants {
     // CAM motor IDs
     public static final int CAMleft = 18;
     public static final int CAMright = 19;
-    public static final int CAMsmall = 21;
 
     // CAM motor speed
     public static final double CAMspeed = .1;
@@ -98,7 +98,7 @@ public final class Constants {
     public static final int kPositionConversionFactor = 360;
     public static final int kVelocityConversionFactor = 1000;
 
-    public static final double kP = 10;
+    public static final double kP = 0;
     public static final double kI = 0;
     public static final double kD = 0;
 
