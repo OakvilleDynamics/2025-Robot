@@ -30,7 +30,7 @@ public class FourBarControl extends Command {
 
     // Set the speed of the fourbar to the joystick value, clamped to a set max speed
     // Check inversion of the joystick to ensure proper mechanism control
-    m_FourBarSubsystem.setFourbarSpeedClamped(BarJoystick.getX());
+    m_FourBarSubsystem.setFourbarSpeedClamped(-BarJoystick.getY());
     /**
      * This is the old code that was used to control the fourbar, it only serves as a reference for
      * new code an also to showcase how to use the SmartDashboard to display information
