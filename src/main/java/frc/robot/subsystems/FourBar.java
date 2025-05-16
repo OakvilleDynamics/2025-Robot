@@ -94,10 +94,14 @@ public class FourBar extends SubsystemBase {
   }
 
   // Automatically sets fourbar to score L3
-  public void L3() {}
+  public void L3() {
+    setTargetPosition(FourbarConstants.L3);
+  }
 
   // Automatically set fourbar to score L4
-  public void L4() {}
+  public void L4() {
+    setTargetPosition(FourbarConstants.L4);
+  }
 
   /**
    * Set the speed of the fourbar motor, clamped to the maximum speed.
