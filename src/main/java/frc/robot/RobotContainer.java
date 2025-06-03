@@ -118,9 +118,9 @@ public class RobotContainer {
     NamedCommands.registerCommand("ShootCoral", new InstantCommand(() -> shooter.shootCoral()));
     NamedCommands.registerCommand(
         "StopShooter", new InstantCommand(() -> shooter.disableShooter()));
-    NamedCommands.registerCommand("L2", new InstantCommand(() -> fourbar.L2()));
-    NamedCommands.registerCommand("L3", new InstantCommand(() -> fourbar.L3()));
-    NamedCommands.registerCommand("L4", new InstantCommand(() -> fourbar.L4()));
+    // NamedCommands.registerCommand("L2", new InstantCommand(() -> fourbar.L2()));
+    // NamedCommands.registerCommand("L3", new InstantCommand(() -> fourbar.L3()));
+    // NamedCommands.registerCommand("L4", new InstantCommand(() -> fourbar.L4()));
 
     configureBindings();
 

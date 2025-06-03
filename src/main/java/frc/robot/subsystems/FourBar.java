@@ -52,6 +52,26 @@ public class FourBar extends SubsystemBase {
     e_fourbar.setPosition(shaftEncoder.get());
   }
 
+  public void L1() {
+    setTargetPosition(FourbarConstants.L1);
+  }
+
+  public void L2() {
+    setTargetPosition(FourbarConstants.L2);
+  }
+
+  public void L3() {
+    setTargetPosition(FourbarConstants.L3);
+  }
+
+  public void L4() {
+    setTargetPosition(FourbarConstants.L4);
+  }
+
+  public void disableFourBar() {
+    FourbarMotor.set(0);
+  }
+
   public boolean atTargetPosition() {
     return Math.abs(avgEncoderPos() - m_setpoint) < FourbarConstants.kPositionTolerance;
   }
@@ -67,37 +87,6 @@ public class FourBar extends SubsystemBase {
   private void moveToSetpoint() {
     p_fourbar.setReference(m_setpoint, ControlType.kMAXMotionPositionControl);
   }
-
-  // Makes Fourbar go up manually
-  public void UpBar() {
-    FourbarMotor.set(MechanismConstants.FourBarSpeed);
-  }
-
-  // Makes Fourbar go down manually
-  public void DownBar() {
-    FourbarMotor.set(-MechanismConstants.FourBarSpeed);
-  }
-
-  // Stops Fourbar motors
-  public void disableFourBar() {
-    FourbarMotor.set(0);
-  }
-
-  // Automatically sets fourbar to deafault position to score L1
-  public void L1() {
-    setTargetPosition(FourbarConstants.L1);
-  }
-
-  // Automatically sets fourbar to score L2
-  public void L2() {
-    setTargetPosition(FourbarConstants.L2);
-  }
-
-  // Automatically sets fourbar to score L3
-  public void L3() {}
-
-  // Automatically set fourbar to score L4
-  public void L4() {}
 
   /**
    * Set the speed of the fourbar motor, clamped to the maximum speed.
