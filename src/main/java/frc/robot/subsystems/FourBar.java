@@ -5,9 +5,8 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkAbsoluteEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
@@ -31,6 +30,8 @@ public class FourBar extends SubsystemBase {
 
   private RelativeEncoder e_fourbar;
 
+  private SparkAbsoluteEncoder e_shaft;
+
   private SparkMaxConfig c_fourbar;
 
   private double m_setpoint;
@@ -39,14 +40,16 @@ public class FourBar extends SubsystemBase {
 
     c_fourbar = Configs.FourbarConfig.FourbarConfig;
 
-    FourbarMotor.configure(
-        c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    // FourbarMotor.configure(
+    //    c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_setpoint = FourbarConstants.kStartingPosition;
 
     p_fourbar = FourbarMotor.getClosedLoopController();
 
     e_fourbar = FourbarMotor.getEncoder();
+
+    e_shaft = FourbarMotor.getAbsoluteEncoder();
 
     e_fourbar.setPosition(0);
   }
@@ -93,6 +96,10 @@ public class FourBar extends SubsystemBase {
         MathUtil.clamp(speed, -MechanismConstants.FourBarSpeed, MechanismConstants.FourBarSpeed));
   }
 
+  public void set(double speed) {
+    FourbarMotor.set(speed);
+  }
+
   /**
    * Set the speed of the fourbar with a deadband.
    *
@@ -109,6 +116,8 @@ public class FourBar extends SubsystemBase {
     SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
     SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
     SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.getPosition());
+    SmartDashboard.putNumber("Fourbar/Shaft Position 2", e_shaft.getPosition());
+    SmartDashboard.putNumber("Fourbar/Shaft Velocity 2", e_shaft.getVelocity());
     SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
   }
 }

@@ -20,6 +20,7 @@ import frc.robot.Constants.FourbarConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.CAMcommand;
+import frc.robot.commands.FourBarControl;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.misc.Alerts;
 import frc.robot.subsystems.Algae;
@@ -112,6 +113,7 @@ public class RobotContainer {
     algae.setDefaultCommand(new AlgaeCommand(algae));
     shooter.setDefaultCommand(new ShooterCommand(shooter));
     cam.setDefaultCommand(new CAMcommand(cam));
+    fourbar.setDefaultCommand(new FourBarControl(fourbar));
 
     configureBindings();
 
