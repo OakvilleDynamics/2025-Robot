@@ -13,7 +13,6 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
@@ -26,7 +25,7 @@ public class FourBar extends SubsystemBase {
 
   private SparkClosedLoopController fourbar;
 
-  private DutyCycleEncoder shaftEncoder = new DutyCycleEncoder(MechanismConstants.FourbarEncoder);
+  private RelativeEncoder shaftEncoder = FourbarMotor.getEncoder();
 
   private SparkClosedLoopController p_fourbar;
 
@@ -49,7 +48,7 @@ public class FourBar extends SubsystemBase {
 
     e_fourbar = FourbarMotor.getEncoder();
 
-    e_fourbar.setPosition(shaftEncoder.get());
+    e_fourbar.setPosition(0);
   }
 
   public boolean atTargetPosition() {
@@ -62,6 +61,7 @@ public class FourBar extends SubsystemBase {
 
   public void setTargetPosition(double setpoint) {
     m_setpoint = setpoint;
+    moveToSetpoint();
   }
 
   private void moveToSetpoint() {
@@ -83,26 +83,6 @@ public class FourBar extends SubsystemBase {
     FourbarMotor.set(0);
   }
 
-  // Automatically sets fourbar to deafault position to score L1
-  public void L1() {
-    setTargetPosition(FourbarConstants.L1);
-  }
-
-  // Automatically sets fourbar to score L2
-  public void L2() {
-    setTargetPosition(FourbarConstants.L2);
-  }
-
-  // Automatically sets fourbar to score L3
-  public void L3() {
-    setTargetPosition(FourbarConstants.L3);
-  }
-
-  // Automatically set fourbar to score L4
-  public void L4() {
-    setTargetPosition(FourbarConstants.L4);
-  }
-
   /**
    * Set the speed of the fourbar motor, clamped to the maximum speed.
    *
@@ -113,14 +93,22 @@ public class FourBar extends SubsystemBase {
         MathUtil.clamp(speed, -MechanismConstants.FourBarSpeed, MechanismConstants.FourBarSpeed));
   }
 
+  /**
+   * Set the speed of the fourbar with a deadband.
+   *
+   * @param speed Speed to set the fourbar motor to
+   */
+  public void setFourbarSpeedWithDeadband(double speed) {
+    FourbarMotor.set(MathUtil.applyDeadband(speed, 0.025, MechanismConstants.FourBarSpeed));
+  }
+
   @Override
   public void periodic() { // This method will be called once per scheduler run
     SmartDashboard.putNumber("Fourbar/Motor Speed", FourbarMotor.get());
     SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
     SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
     SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
-    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.get());
+    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.getPosition());
     SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
-    moveToSetpoint();
   }
 }
