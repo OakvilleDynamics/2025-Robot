@@ -25,8 +25,8 @@ public final class Configs {
           .pid(FourbarConstants.kP, FourbarConstants.kI, FourbarConstants.kD)
           .outputRange(-1, 1)
           .maxMotion
-          .maxVelocity(800)
-          .maxAcceleration(6000)
+          .maxVelocity(2000)
+          .maxAcceleration(1000)
           .positionMode(MAXMotionPositionMode.kMAXMotionTrapezoidal)
           .allowedClosedLoopError(FourbarConstants.kPositionTolerance);
       FourbarConfig.softLimit

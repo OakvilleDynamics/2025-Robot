@@ -5,15 +5,13 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.RelativeEncoder;
+import com.revrobotics.spark.SparkAbsoluteEncoder;
 import com.revrobotics.spark.SparkBase.ControlType;
-import com.revrobotics.spark.SparkBase.PersistMode;
-import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkClosedLoopController;
 import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
@@ -26,11 +24,13 @@ public class FourBar extends SubsystemBase {
 
   private SparkClosedLoopController fourbar;
 
-  private DutyCycleEncoder shaftEncoder = new DutyCycleEncoder(MechanismConstants.FourbarEncoder);
+  private RelativeEncoder shaftEncoder = FourbarMotor.getEncoder();
 
   private SparkClosedLoopController p_fourbar;
 
   private RelativeEncoder e_fourbar;
+
+  private SparkAbsoluteEncoder e_shaft;
 
   private SparkMaxConfig c_fourbar;
 
@@ -40,8 +40,8 @@ public class FourBar extends SubsystemBase {
 
     c_fourbar = Configs.FourbarConfig.FourbarConfig;
 
-    FourbarMotor.configure(
-        c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    // FourbarMotor.configure(
+    //    c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
     m_setpoint = FourbarConstants.kStartingPosition;
 
@@ -49,55 +49,71 @@ public class FourBar extends SubsystemBase {
 
     e_fourbar = FourbarMotor.getEncoder();
 
-    e_fourbar.setPosition(shaftEncoder.get());
+    e_shaft = FourbarMotor.getAbsoluteEncoder();
+
+    e_fourbar.setPosition(0);
   }
 
+  /**
+   * Checks if the fourbar is at the target position.
+   *
+   * @return True if the fourbar is at the target position, false otherwise.
+   */
   public boolean atTargetPosition() {
     return Math.abs(avgEncoderPos() - m_setpoint) < FourbarConstants.kPositionTolerance;
   }
 
+  /**
+   * Gets the current position of the fourbar.
+   *
+   * @return The current position of the fourbar.
+   */
   public double avgEncoderPos() {
     return (e_fourbar.getPosition());
   }
 
+  /**
+   * Sets the target position for the fourbar.
+   *
+   * @param setpoint The desired position to set the fourbar to.
+   */
   public void setTargetPosition(double setpoint) {
     m_setpoint = setpoint;
+    moveToSetpoint();
   }
 
+  /**
+   * Moves the fourbar to the setpoint position using the closed-loop controller. This method uses
+   * the MAX Motion Position Control to move the fourbar to the desired position. It is called after
+   * setting the target position with {@link #setTargetPosition(double)}.
+   */
   private void moveToSetpoint() {
     p_fourbar.setReference(m_setpoint, ControlType.kMAXMotionPositionControl);
   }
 
-  // Makes Fourbar go up manually
+  /**
+   * Moves the fourbar up at a constant speed. This method is used to manually control the fourbar's
+   * movement.
+   */
   public void UpBar() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
-  // Makes Fourbar go down manually
+  /**
+   * Moves the fourbar down at a constant speed. This method is used to manually control the
+   * fourbar's movement.
+   */
   public void DownBar() {
     FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
-  // Stops Fourbar motors
+  /**
+   * Disables the fourbar motor by setting its speed to zero. This method is used to stop the
+   * fourbar's movement manually.
+   */
   public void disableFourBar() {
     FourbarMotor.set(0);
   }
-
-  // Automatically sets fourbar to deafault position to score L1
-  public void L1() {
-    setTargetPosition(FourbarConstants.L1);
-  }
-
-  // Automatically sets fourbar to score L2
-  public void L2() {
-    setTargetPosition(FourbarConstants.L2);
-  }
-
-  // Automatically sets fourbar to score L3
-  public void L3() {}
-
-  // Automatically set fourbar to score L4
-  public void L4() {}
 
   /**
    * Set the speed of the fourbar motor, clamped to the maximum speed.
@@ -109,14 +125,28 @@ public class FourBar extends SubsystemBase {
         MathUtil.clamp(speed, -MechanismConstants.FourBarSpeed, MechanismConstants.FourBarSpeed));
   }
 
+  public void set(double speed) {
+    FourbarMotor.set(speed);
+  }
+
+  /**
+   * Set the speed of the fourbar with a deadband.
+   *
+   * @param speed Speed to set the fourbar motor to
+   */
+  public void setFourbarSpeedWithDeadband(double speed) {
+    FourbarMotor.set(MathUtil.applyDeadband(speed, 0.025, MechanismConstants.FourBarSpeed));
+  }
+
   @Override
   public void periodic() { // This method will be called once per scheduler run
     SmartDashboard.putNumber("Fourbar/Motor Speed", FourbarMotor.get());
     SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
     SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
     SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
-    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.get());
+    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.getPosition());
+    SmartDashboard.putNumber("Fourbar/Shaft Position 2", e_shaft.getPosition());
+    SmartDashboard.putNumber("Fourbar/Shaft Velocity 2", e_shaft.getVelocity());
     SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
-    moveToSetpoint();
   }
 }
