@@ -54,34 +54,63 @@ public class FourBar extends SubsystemBase {
     e_fourbar.setPosition(0);
   }
 
+  /**
+   * Checks if the fourbar is at the target position.
+   * 
+   * @return True if the fourbar is at the target position, false otherwise.
+   */
   public boolean atTargetPosition() {
     return Math.abs(avgEncoderPos() - m_setpoint) < FourbarConstants.kPositionTolerance;
   }
 
+  /**
+   * Gets the current position of the fourbar.
+   * 
+   * @return The current position of the fourbar.
+   */
   public double avgEncoderPos() {
     return (e_fourbar.getPosition());
   }
 
+  /**
+   * Sets the target position for the fourbar.
+   * 
+   * @param setpoint The desired position to set the fourbar to.
+   */
   public void setTargetPosition(double setpoint) {
     m_setpoint = setpoint;
     moveToSetpoint();
   }
 
+  /**
+   * Moves the fourbar to the setpoint position using the closed-loop controller.
+   * This method uses the MAX Motion Position Control to move the fourbar to the desired position.
+   * It is called after setting the target position with {@link #setTargetPosition(double)}.
+   */
   private void moveToSetpoint() {
     p_fourbar.setReference(m_setpoint, ControlType.kMAXMotionPositionControl);
   }
 
-  // Makes Fourbar go up manually
+  /**
+   * Moves the fourbar up at a constant speed.
+   * This method is used to manually control the fourbar's movement.
+   */
   public void UpBar() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
-  // Makes Fourbar go down manually
+  /**
+   * Moves the fourbar down at a constant speed.
+   * This method is used to manually control the fourbar's movement.
+   */
   public void DownBar() {
     FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
-  // Stops Fourbar motors
+  /**
+   * Disables the fourbar motor by setting its speed to zero.
+   * This method is used to stop the fourbar's movement manually.
+   */
   public void disableFourBar() {
     FourbarMotor.set(0);
   }
