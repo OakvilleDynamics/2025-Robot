@@ -56,7 +56,7 @@ public class FourBar extends SubsystemBase {
 
   /**
    * Checks if the fourbar is at the target position.
-   * 
+   *
    * @return True if the fourbar is at the target position, false otherwise.
    */
   public boolean atTargetPosition() {
@@ -65,7 +65,7 @@ public class FourBar extends SubsystemBase {
 
   /**
    * Gets the current position of the fourbar.
-   * 
+   *
    * @return The current position of the fourbar.
    */
   public double avgEncoderPos() {
@@ -74,7 +74,7 @@ public class FourBar extends SubsystemBase {
 
   /**
    * Sets the target position for the fourbar.
-   * 
+   *
    * @param setpoint The desired position to set the fourbar to.
    */
   public void setTargetPosition(double setpoint) {
@@ -83,33 +83,33 @@ public class FourBar extends SubsystemBase {
   }
 
   /**
-   * Moves the fourbar to the setpoint position using the closed-loop controller.
-   * This method uses the MAX Motion Position Control to move the fourbar to the desired position.
-   * It is called after setting the target position with {@link #setTargetPosition(double)}.
+   * Moves the fourbar to the setpoint position using the closed-loop controller. This method uses
+   * the MAX Motion Position Control to move the fourbar to the desired position. It is called after
+   * setting the target position with {@link #setTargetPosition(double)}.
    */
   private void moveToSetpoint() {
     p_fourbar.setReference(m_setpoint, ControlType.kMAXMotionPositionControl);
   }
 
   /**
-   * Moves the fourbar up at a constant speed.
-   * This method is used to manually control the fourbar's movement.
+   * Moves the fourbar up at a constant speed. This method is used to manually control the fourbar's
+   * movement.
    */
   public void UpBar() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
   /**
-   * Moves the fourbar down at a constant speed.
-   * This method is used to manually control the fourbar's movement.
+   * Moves the fourbar down at a constant speed. This method is used to manually control the
+   * fourbar's movement.
    */
   public void DownBar() {
     FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
   /**
-   * Disables the fourbar motor by setting its speed to zero.
-   * This method is used to stop the fourbar's movement manually.
+   * Disables the fourbar motor by setting its speed to zero. This method is used to stop the
+   * fourbar's movement manually.
    */
   public void disableFourBar() {
     FourbarMotor.set(0);
