@@ -73,8 +73,8 @@ public final class Constants {
 
     // Motor Speeds for Algae
     public static final double ALGAE_HINGE_SPEED = 0.2;
-    public static final double ALGAE_INTAKE_SPEED = 0.5;
-    public static final double ALGAE_SHOOT_FAST = 1;
+    public static final double ALGAE_INTAKE_SPEED = 0.25;
+    public static final double ALGAE_SHOOT_FAST = 0.5;
 
     // Motor speed for Shooter
     public static final double ShooterSpeed = .3;
