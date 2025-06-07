@@ -60,7 +60,7 @@ public class RobotContainer {
           .withControllerRotationAxis(() -> -driverXbox.getRightX())
           .deadband(OperatorConstants.kDEADBAND)
           .scaleTranslation(0.8)
-          .allianceRelativeControl(true);
+          .allianceRelativeControl(false);
 
   /**
    * Same as driveAngularVelocity, but slower full outputs at 50% speed. This is used for more
