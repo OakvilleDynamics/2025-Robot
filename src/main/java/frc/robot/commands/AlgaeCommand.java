@@ -47,7 +47,7 @@ public class AlgaeCommand extends Command {
       // Button 5 is used to move the algae up
       m_AlgaeSubsystem.UpAlgae();
     } else {
-      m_AlgaeSubsystem.UpAlgae();
+      m_AlgaeSubsystem.disableAlgae();
     }
   }
  
