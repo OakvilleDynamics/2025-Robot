@@ -112,17 +112,4 @@ public final class Constants {
     public static final double L3 = 3000;
     public static final double L4 = 360;
   }
-
-  public static final class AlgaeConstants {
-    public static final double kHingePositionTolerance = 0.5; // Tolerance for hinge position
-    public static final double kIntakePositionTolerance = 0.5; // Tolerance for intake position
-    public static final double kHingeSpeed = 0.2; // Speed for hinge movement
-    public static final double kIntakeSpeed = 0.25; // Speed for intake movement
-    public static final double kShootFastSpeed = 0.5; // Speed for fast shooting
-
-    public static final double kUpPosition = -3.0; // DEFAULT STARTING, SHOULD BE THIS POSITION ON INIT
-    public static final double kNeutralPosition = -1.5; // Neutral position for algae hinge
-    public static final double kScoringPosition = 7.5; // Shooting position for algae hinge
-    public static final double kIntakePosition = -10.0; // Intake position for algae hinge
-  }
 }

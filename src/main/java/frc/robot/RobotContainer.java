@@ -16,9 +16,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.AlgaeConstants;
 import frc.robot.Constants.FourbarConstants;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.CAMcommand;
 import frc.robot.commands.FourBarControl;
 import frc.robot.commands.ShooterCommand;
@@ -110,6 +110,7 @@ public class RobotContainer {
 
   public RobotContainer() {
 
+    algae.setDefaultCommand(new AlgaeCommand(algae));
     shooter.setDefaultCommand(new ShooterCommand(shooter));
     cam.setDefaultCommand(new CAMcommand(cam));
     fourbar.setDefaultCommand(new FourBarControl(fourbar));
@@ -185,22 +186,6 @@ public class RobotContainer {
       driverXbox.back().whileTrue(Commands.none());
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.rightBumper().onTrue(Commands.none());
-
-      driverController.trigger().whileTrue(Commands.run(() -> algae.shootAlgae()));
-      driverController.top().whileTrue(Commands.run(() -> algae.intakeAlgae()));
-
-      driverController
-          .button(3)
-          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kUpPosition)));
-      driverController
-          .button(4)
-          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kIntakePosition)));
-      driverController
-          .button(5)
-          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kScoringPosition)));
-      driverController
-          .button(6)
-          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kNeutralPosition)));
 
       driverController
           .button(9)
