@@ -17,6 +17,7 @@ import com.revrobotics.spark.config.ClosedLoopConfig.FeedbackSensor;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants.AlgaeConstants;
 import frc.robot.Constants.FourbarConstants;
 import frc.robot.Constants.MechanismConstants;
 
@@ -49,7 +50,7 @@ public class Algae extends SubsystemBase {
         .p(0.1)
         .i(0)
         .d(0)
-        .outputRange(-1, 1)
+        .outputRange(-AlgaeConstants.kHingeSpeed, AlgaeConstants.kHingeSpeed)
         // Set PID values for velocity control in slot 1
         .p(0.0001, ClosedLoopSlot.kSlot1)
         .i(0, ClosedLoopSlot.kSlot1)
