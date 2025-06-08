@@ -11,6 +11,7 @@ import com.revrobotics.spark.SparkLowLevel;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.config.SparkMaxConfig;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
@@ -35,6 +36,8 @@ public class Algae extends SubsystemBase {
 
   private DutyCycleEncoder shaftEncoder = new DutyCycleEncoder(MechanismConstants.ALGAE_Encoder);
 
+  private String hingeActivity = "Initialized";
+
   /** Intakes Algae */
   public void intakeAlgae() {
     AlgaeRight.set(MechanismConstants.ALGAE_INTAKE_SPEED);
@@ -44,11 +47,13 @@ public class Algae extends SubsystemBase {
   /** Makes hinge go up */
   public void UpAlgae() {
     AlgaeHinge.set(MechanismConstants.ALGAE_HINGE_SPEED);
+    hingeActivity = "UP";
   }
 
   /** Makes hinge go down */
   public void DownAlgae() {
     AlgaeHinge.set(-MechanismConstants.ALGAE_HINGE_SPEED);
+    hingeActivity = "DOWN";
   }
 
   /** Sets the Algae motors to 0% power */
@@ -60,6 +65,7 @@ public class Algae extends SubsystemBase {
   // Stops Algae Hinge
   public void disablehinge() {
     AlgaeHinge.set(0);
+    hingeActivity = "STOPPED";
   }
 
   /** Reverses Algae intake speed to score into processor */
@@ -103,5 +109,12 @@ public class Algae extends SubsystemBase {
    */
   public double getShaftEncoderPosition() {
     return shaftEncoder.get();
+  }
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Algae/Hinge Power", AlgaeHinge.getAppliedOutput());
+    SmartDashboard.putNumber("Algae/Hinge Current", AlgaeHinge.getOutputCurrent());
+    SmartDashboard.putString("Algae/Hinge Activity", hingeActivity);
   }
 }
