@@ -191,13 +191,16 @@ public class RobotContainer {
 
       driverController
           .button(3)
-          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kFlatPosition)));
+          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kUpPosition)));
       driverController
           .button(4)
           .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kIntakePosition)));
       driverController
           .button(5)
           .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kShootPosition)));
+      driverController
+          .button(6)
+          .toggleOnTrue(Commands.run(() -> algae.setHingePosition(AlgaeConstants.kNeutralPosition)));
 
       driverController
           .button(9)

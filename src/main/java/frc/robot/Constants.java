@@ -120,8 +120,9 @@ public final class Constants {
     public static final double kIntakeSpeed = 0.25; // Speed for intake movement
     public static final double kShootFastSpeed = 0.5; // Speed for fast shooting
 
-    public static final double kFlatPosition = 0.0; // Flat position for algae hinge
-    public static final double kIntakePosition = 90.0; // Intake position for algae hinge
-    public static final double kShootPosition = 180.0; // Shooting position for algae hinge
+    public static final double kUpPosition = -3.0; // DEFAULT STARTING, SHOULD BE THIS POSITION ON INIT
+    public static final double kNeutralPosition = -1.5; // Neutral position for algae hinge
+    public static final double kScoringPosition = 7.5; // Shooting position for algae hinge
+    public static final double kIntakePosition = -10.0; // Intake position for algae hinge
   }
 }
