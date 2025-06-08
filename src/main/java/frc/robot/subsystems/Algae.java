@@ -61,6 +61,8 @@ public class Algae extends SubsystemBase {
     // Apply the hinge configuration to the algae hinge motor
     algaeHinge.configure(
         hingeConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+
+    hingeEncoder.setPosition(0);
   }
 
   /**
