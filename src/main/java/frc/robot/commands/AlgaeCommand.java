@@ -50,7 +50,7 @@ public class AlgaeCommand extends Command {
       m_AlgaeSubsystem.disablehinge();
     }
   }
- 
+
   @Override
   public void end(boolean interrupted) {
     m_AlgaeSubsystem.disableAlgae();
