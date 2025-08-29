@@ -49,6 +49,6 @@ jobs:
 
       # Check if there are any changes, if so, create a commit and push it
       - name: Create commit of formatted code
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "[Spotless] Apply formatting"
