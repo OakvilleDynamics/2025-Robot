@@ -32,11 +32,12 @@ public class FourBarControl extends Command {
     m_FourBarSubsystem.setFourbarSpeedClamped(-BarJoystick.getY());
 
     // Check if the joystick is being moved, if it is, report that the fourbar is moving
-    if (BarJoystick.getY() > 0.1 || BarJoystick.getY() < -0.1) {
-      fourbarActivity = "Fourbar moving at " + BarJoystick.getY();
+    if (BarJoystick.getTrigger()) {
+      m_FourBarSubsystem.UpBar();
+    } else if (BarJoystick.getRawButton(2)) {
+      m_FourBarSubsystem.DownBar();
     } else {
       m_FourBarSubsystem.disableFourBar();
-      fourbarActivity = "Fourbar Disabled";
     }
     SmartDashboard.putString("Fourbar Activity", fourbarActivity);
   }
