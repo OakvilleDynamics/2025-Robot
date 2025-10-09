@@ -1,16 +1,16 @@
 package frc.robot.subsystems;
 
 import com.revrobotics.spark.SparkLowLevel;
-import com.revrobotics.spark.SparkMax;
+import com.revrobotics.spark.SparkFlex;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.MechanismConstants;
 
 public class CAM extends SubsystemBase {
-  private final SparkMax CAMright =
-      new SparkMax(MechanismConstants.CAMright, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex CAMright =
+      new SparkFlex(MechanismConstants.CAMright, SparkLowLevel.MotorType.kBrushless);
 
-  private final SparkMax CAMleft =
-      new SparkMax(MechanismConstants.CAMleft, SparkLowLevel.MotorType.kBrushless);
+  private final SparkFlex CAMleft =
+      new SparkFlex(MechanismConstants.CAMleft, SparkLowLevel.MotorType.kBrushless);
 
   // Starts CAM motors to climb
   public void closeCAM() {
