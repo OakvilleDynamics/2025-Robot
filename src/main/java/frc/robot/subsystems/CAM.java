@@ -18,6 +18,11 @@ public class CAM extends SubsystemBase {
     CAMleft.set(MechanismConstants.CAMspeed);
   }
 
+  public void openCAM() {
+    CAMright.set(MechanismConstants.CAMspeed);
+    CAMleft.set(-MechanismConstants.CAMspeed);
+  }
+
   // Stops CAM motors
   public void stopCAM() {
     CAMright.set(0);
