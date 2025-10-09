@@ -11,7 +11,6 @@ public class RelayCommand extends Command {
 
   private final Joystick MagRelayJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER);
 
-
   public RelayCommand(MagRelay subsystem) {
     m_MagRelaySubsystem = subsystem;
     addRequirements(m_MagRelaySubsystem);
@@ -20,9 +19,8 @@ public class RelayCommand extends Command {
   public void execute() {
     if (MagRelayJoystick.getRawButton(8)) {
       m_MagRelaySubsystem.RelayOn();
-    }
-    else {
-        m_MagRelaySubsystem.RelayOff();
+    } else {
+      m_MagRelaySubsystem.RelayOff();
     }
   }
 }
