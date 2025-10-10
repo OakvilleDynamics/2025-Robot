@@ -84,8 +84,8 @@ public final class Constants {
     public static final double FourBarSpeed = .3;
 
     // CAM motor IDs
-    public static final int CAMleft = 18;
-    public static final int CAMright = 19;
+    public static final int CAMleft = 19;
+    public static final int CAMright = 18;
 
     // CAM motor speed
     public static final double CAMspeed = .1;
