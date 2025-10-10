@@ -4,19 +4,19 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Dump;
 
-public class FourBarControl extends Command {
+public class DumpControl extends Command {
 
-  private final FourBar m_FourBarSubsystem;
+  private final Dump m_DumpSubsystem;
 
-  private final Joystick BarJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER);
+  private final Joystick DumpJoystick = new Joystick(OperatorConstants.COPILOT_CONTROLLER);
 
-  private String fourbarActivity = "Fourbar Disabled";
+  private String fourbarActivity = "Dump Disabled";
 
-  public FourBarControl(FourBar subsystem) {
-    m_FourBarSubsystem = subsystem;
-    addRequirements(m_FourBarSubsystem);
+  public DumpControl(Dump subsystem) {
+    m_DumpSubsystem = subsystem;
+    addRequirements(m_DumpSubsystem);
   }
 
   @Override
@@ -29,15 +29,15 @@ public class FourBarControl extends Command {
 
     // Set the speed of the fourbar to the joystick value, clamped to a set max speed
     // Check inversion of the joystick to ensure proper mechanism control
-    m_FourBarSubsystem.setFourbarSpeedClamped(-BarJoystick.getY());
+    m_DumpSubsystem.setFourbarSpeedClamped(-DumpJoystick.getY());
 
     // Check if the joystick is being moved, if it is, report that the fourbar is moving
-    if (BarJoystick.getTrigger()) {
-      m_FourBarSubsystem.UpBar();
-    } else if (BarJoystick.getRawButton(2)) {
-      m_FourBarSubsystem.DownBar();
+    if (DumpJoystick.getTrigger()) {
+      m_DumpSubsystem.DumpCoral();
+    } else if (DumpJoystick.getRawButton(2)) {
+      m_DumpSubsystem.Back();
     } else {
-      m_FourBarSubsystem.disableFourBar();
+      m_DumpSubsystem.disableFourBar();
     }
     SmartDashboard.putString("Fourbar Activity", fourbarActivity);
   }

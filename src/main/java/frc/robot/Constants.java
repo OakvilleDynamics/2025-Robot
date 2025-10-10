@@ -88,10 +88,10 @@ public final class Constants {
     public static final int CAMright = 18;
 
     // CAM motor speed
-    public static final double CAMspeed = .1;
+    public static final double CAMspeed = .75;
   }
 
-  public static final class FourbarConstants {
+  public static final class DumpConstants {
     public static final int kStartingPosition = 0;
     public static final int kCurrentLimit = 40;
 
@@ -109,7 +109,5 @@ public final class Constants {
 
     public static final double L1 = 1000;
     public static final double L2 = 2000;
-    public static final double L3 = 3000;
-    public static final double L4 = 360;
   }
 }
