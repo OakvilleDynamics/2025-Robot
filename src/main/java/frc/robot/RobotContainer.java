@@ -215,13 +215,11 @@ public class RobotContainer {
     } */
     // return drivebase.getAutonomousCommand(autoChooser.get().getName());
     return drivebase
-        .driveCommand(() -> 0, () -> 0, () -> 0)
+        .driveCommand(() -> -0.5, () -> 0, () -> 0)
         .repeatedly()
-        .withTimeout(.5)
+        .withTimeout(2)
         .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
-        .andThen(() -> dump.Back())
-        .repeatedly()
-        .withTimeout(2);
+        .andThen(shooter.AutoShoot());
   }
 
   public void setDriveMode() {
