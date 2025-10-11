@@ -15,14 +15,14 @@ import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Configs;
-import frc.robot.Constants.FourbarConstants;
+import frc.robot.Constants.DumpConstants;
 import frc.robot.Constants.MechanismConstants;
 
-public class FourBar extends SubsystemBase {
+public class Dump extends SubsystemBase {
   private final SparkMax FourbarMotor =
       new SparkMax(MechanismConstants.FourbarMotor, SparkLowLevel.MotorType.kBrushless);
 
-  private SparkClosedLoopController fourbar;
+  private SparkClosedLoopController dumpBed;
 
   private RelativeEncoder shaftEncoder = FourbarMotor.getEncoder();
 
@@ -32,18 +32,18 @@ public class FourBar extends SubsystemBase {
 
   private SparkAbsoluteEncoder e_shaft;
 
-  private SparkMaxConfig c_fourbar;
+  private SparkMaxConfig c_dumpBed;
 
   private double m_setpoint;
 
-  public FourBar() {
+  public Dump() {
 
-    c_fourbar = Configs.FourbarConfig.FourbarConfig;
+    c_dumpBed = Configs.DumpConfig.FourbarConfig;
 
     // FourbarMotor.configure(
     //    c_fourbar, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
 
-    m_setpoint = FourbarConstants.kStartingPosition;
+    m_setpoint = DumpConstants.kStartingPosition;
 
     p_fourbar = FourbarMotor.getClosedLoopController();
 
@@ -55,27 +55,27 @@ public class FourBar extends SubsystemBase {
   }
 
   /**
-   * Checks if the fourbar is at the target position.
+   * Checks if the dump bed is at the target position.
    *
-   * @return True if the fourbar is at the target position, false otherwise.
+   * @return True if the dump bed is at the target position, false otherwise.
    */
   public boolean atTargetPosition() {
-    return Math.abs(avgEncoderPos() - m_setpoint) < FourbarConstants.kPositionTolerance;
+    return Math.abs(avgEncoderPos() - m_setpoint) < DumpConstants.kPositionTolerance;
   }
 
   /**
-   * Gets the current position of the fourbar.
+   * Gets the current position of the dump bed.
    *
-   * @return The current position of the fourbar.
+   * @return The current position of the dump bed.
    */
   public double avgEncoderPos() {
     return (e_fourbar.getPosition());
   }
 
   /**
-   * Sets the target position for the fourbar.
+   * Sets the target position for the dump bed.
    *
-   * @param setpoint The desired position to set the fourbar to.
+   * @param setpoint The desired position to set the dump bed to.
    */
   public void setTargetPosition(double setpoint) {
     m_setpoint = setpoint;
@@ -83,42 +83,42 @@ public class FourBar extends SubsystemBase {
   }
 
   /**
-   * Moves the fourbar to the setpoint position using the closed-loop controller. This method uses
-   * the MAX Motion Position Control to move the fourbar to the desired position. It is called after
-   * setting the target position with {@link #setTargetPosition(double)}.
+   * Moves the dump bed to the setpoint position using the closed-loop controller. This method uses
+   * the MAX Motion Position Control to move the dump bed to the desired position. It is called
+   * after setting the target position with {@link #setTargetPosition(double)}.
    */
   private void moveToSetpoint() {
     p_fourbar.setReference(m_setpoint, ControlType.kMAXMotionPositionControl);
   }
 
   /**
-   * Moves the fourbar up at a constant speed. This method is used to manually control the fourbar's
-   * movement.
+   * Moves the dump bed up at a constant speed. This method is used to manually control the dump
+   * bed's movement.
    */
-  public void UpBar() {
+  public void DumpCoral() {
     FourbarMotor.set(MechanismConstants.FourBarSpeed);
   }
 
   /**
-   * Moves the fourbar down at a constant speed. This method is used to manually control the
-   * fourbar's movement.
+   * Moves the dump bed down at a constant speed. This method is used to manually control the dump
+   * bed's movement.
    */
-  public void DownBar() {
+  public void Back() {
     FourbarMotor.set(-MechanismConstants.FourBarSpeed);
   }
 
   /**
-   * Disables the fourbar motor by setting its speed to zero. This method is used to stop the
-   * fourbar's movement manually.
+   * Disables the dump bed motor by setting its speed to zero. This method is used to stop the dump
+   * bed's movement manually.
    */
   public void disableFourBar() {
     FourbarMotor.set(0);
   }
 
   /**
-   * Set the speed of the fourbar motor, clamped to the maximum speed.
+   * Set the speed of the dump bed motor, clamped to the maximum speed.
    *
-   * @param speed Clamped speed to set the fourbar motor to
+   * @param speed Clamped speed to set the dump bed motor to
    */
   public void setFourbarSpeedClamped(double speed) {
     FourbarMotor.set(
@@ -130,9 +130,9 @@ public class FourBar extends SubsystemBase {
   }
 
   /**
-   * Set the speed of the fourbar with a deadband.
+   * Set the speed of the dump bed with a deadband.
    *
-   * @param speed Speed to set the fourbar motor to
+   * @param speed Speed to set the dump bed motor to
    */
   public void setFourbarSpeedWithDeadband(double speed) {
     FourbarMotor.set(MathUtil.applyDeadband(speed, 0.025, MechanismConstants.FourBarSpeed));
@@ -140,13 +140,13 @@ public class FourBar extends SubsystemBase {
 
   @Override
   public void periodic() { // This method will be called once per scheduler run
-    SmartDashboard.putNumber("Fourbar/Motor Speed", FourbarMotor.get());
-    SmartDashboard.putNumber("Fourbar/Motor Position", e_fourbar.getPosition());
-    SmartDashboard.putNumber("Fourbar/Motor Velocity", e_fourbar.getVelocity());
-    SmartDashboard.putNumber("Fourbar/Setpoint", m_setpoint);
-    SmartDashboard.putNumber("Fourbar/Shaft Position", shaftEncoder.getPosition());
-    SmartDashboard.putNumber("Fourbar/Shaft Position 2", e_shaft.getPosition());
-    SmartDashboard.putNumber("Fourbar/Shaft Velocity 2", e_shaft.getVelocity());
-    SmartDashboard.putBoolean("Fourbar/At Target", atTargetPosition());
+    SmartDashboard.putNumber("Dump Bed/Motor Speed", FourbarMotor.get());
+    SmartDashboard.putNumber("Dump Bed/Motor Position", e_fourbar.getPosition());
+    SmartDashboard.putNumber("Dump Bed/Motor Velocity", e_fourbar.getVelocity());
+    SmartDashboard.putNumber("Dump Bed/Setpoint", m_setpoint);
+    SmartDashboard.putNumber("Dump Bed/Shaft Position", shaftEncoder.getPosition());
+    SmartDashboard.putNumber("Dump Bed/Shaft Position 2", e_shaft.getPosition());
+    SmartDashboard.putNumber("Dump Bed/Shaft Velocity 2", e_shaft.getVelocity());
+    SmartDashboard.putBoolean("Dump Bed/At Target", atTargetPosition());
   }
 }
