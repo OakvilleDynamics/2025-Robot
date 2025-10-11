@@ -102,9 +102,6 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0;
 
-    public static final double kFwdSoftLimit = 3600;
-    public static final double kRevSoftLimit = -3600;
-
     public static final double kPositionTolerance = 0.5;
 
     public static final double L1 = 1000;
