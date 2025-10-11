@@ -219,8 +219,8 @@ public class RobotContainer {
         .repeatedly()
         .withTimeout(.5)
         .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
-        .repeatedly()
         .andThen(() -> dump.DumpCoral())
+        .repeatedly()
         .withTimeout(2);
   }
 
