@@ -167,7 +167,7 @@ gversion {
     indent       = "  "
 }
 
-compileJava.dependsOn 'spotlessApply'
+//compileJava.dependsOn 'spotlessApply'
 
 spotless {
     java {
