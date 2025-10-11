@@ -74,7 +74,7 @@ public final class Constants {
     // Motor Speeds for Algae
     public static final double ALGAE_HINGE_SPEED = 0.2;
     public static final double ALGAE_INTAKE_SPEED = 0.25;
-    public static final double ALGAE_SHOOT_FAST = 0.5;
+    public static final double ALGAE_SHOOT_FAST = 1;
 
     // Motor speed for Shooter
     public static final double ShooterSpeed = .3;
@@ -84,14 +84,14 @@ public final class Constants {
     public static final double FourBarSpeed = .3;
 
     // CAM motor IDs
-    public static final int CAMleft = 18;
-    public static final int CAMright = 19;
+    public static final int CAMleft = 19;
+    public static final int CAMright = 18;
 
     // CAM motor speed
-    public static final double CAMspeed = .1;
+    public static final double CAMspeed = .75;
   }
 
-  public static final class FourbarConstants {
+  public static final class DumpConstants {
     public static final int kStartingPosition = 0;
     public static final int kCurrentLimit = 40;
 
@@ -109,7 +109,5 @@ public final class Constants {
 
     public static final double L1 = 1000;
     public static final double L2 = 2000;
-    public static final double L3 = 3000;
-    public static final double L4 = 360;
   }
 }

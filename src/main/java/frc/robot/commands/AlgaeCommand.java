@@ -29,10 +29,10 @@ public class AlgaeCommand extends Command {
     SmartDashboard.putNumber("Internal Encoder", m_AlgaeSubsystem.getInternalEncoderPosition());
 
     // Shoot or intake the algae based on the buttons pressed
-    if (algaeJoystick.getTrigger()) {
+    if (algaeJoystick.getRawButton(5)) {
       // Shoot the algae if the trigger is pressed
       m_AlgaeSubsystem.shootAlgae();
-    } else if (algaeJoystick.getTop()) {
+    } else if (algaeJoystick.getRawButton(3)) {
       // Intake the algae if the top button is pressed
       m_AlgaeSubsystem.intakeAlgae();
     } else {
@@ -40,10 +40,10 @@ public class AlgaeCommand extends Command {
     }
 
     // Move the algae hinge up or down based on the buttons pressed
-    if (algaeJoystick.getRawButton(3)) {
+    if (algaeJoystick.getRawButton(6)) {
       // Button 3 is used to move the algae down
       m_AlgaeSubsystem.DownAlgae();
-    } else if (algaeJoystick.getRawButton(5)) {
+    } else if (algaeJoystick.getRawButton(4)) {
       // Button 5 is used to move the algae up
       m_AlgaeSubsystem.UpAlgae();
     } else {

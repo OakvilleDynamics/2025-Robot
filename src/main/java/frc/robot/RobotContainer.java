@@ -16,16 +16,16 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.Constants.FourbarConstants;
+import frc.robot.Constants.DumpConstants;
 import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.CAMcommand;
-import frc.robot.commands.FourBarControl;
+import frc.robot.commands.DumpControl;
 import frc.robot.commands.ShooterCommand;
 import frc.robot.misc.Alerts;
 import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.CAM;
-import frc.robot.subsystems.FourBar;
+import frc.robot.subsystems.Dump;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.SwerveSubsystem;
 import java.io.File;
@@ -103,7 +103,7 @@ public class RobotContainer {
 
   private final Algae algae = new Algae();
   private final Shooter shooter = new Shooter();
-  private final FourBar fourbar = new FourBar();
+  private final Dump dump = new Dump();
   private final CAM cam = new CAM();
 
   // Named Commands
@@ -113,7 +113,7 @@ public class RobotContainer {
     algae.setDefaultCommand(new AlgaeCommand(algae));
     shooter.setDefaultCommand(new ShooterCommand(shooter));
     cam.setDefaultCommand(new CAMcommand(cam));
-    fourbar.setDefaultCommand(new FourBarControl(fourbar));
+    dump.setDefaultCommand(new DumpControl(dump));
 
     configureBindings();
 
@@ -188,21 +188,11 @@ public class RobotContainer {
       driverXbox.rightBumper().onTrue(Commands.none());
 
       driverController
-          .button(9)
-          .toggleOnTrue(
-              new RunCommand(() -> fourbar.setTargetPosition(FourbarConstants.L1), fourbar));
-      driverController
-          .button(10)
-          .toggleOnTrue(
-              new RunCommand(() -> fourbar.setTargetPosition(FourbarConstants.L2), fourbar));
-      driverController
           .button(11)
-          .toggleOnTrue(
-              new RunCommand(() -> fourbar.setTargetPosition(FourbarConstants.L3), fourbar));
+          .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L1), dump));
       driverController
           .button(12)
-          .toggleOnTrue(
-              new RunCommand(() -> fourbar.setTargetPosition(FourbarConstants.L4), fourbar));
+          .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L2), dump));
     }
   }
 

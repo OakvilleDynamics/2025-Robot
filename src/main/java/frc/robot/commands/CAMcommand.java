@@ -27,9 +27,10 @@ public class CAMcommand extends Command {
   // Controls for Shooter Mech
 
   public void execute() {
-    if (CAMJoystick.getRawButton(4)) {
+    if (CAMJoystick.getRawButton(7)) {
       m_CAMSubsystem.closeCAM();
-      isClosing = true;
+    } else if (CAMJoystick.getRawButton(9)) {
+      m_CAMSubsystem.openCAM();
     } else {
       m_CAMSubsystem.stopCAM();
     }
