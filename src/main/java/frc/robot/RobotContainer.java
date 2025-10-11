@@ -5,11 +5,6 @@
 package frc.robot;
 
 import com.pathplanner.lib.auto.AutoBuilder;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.RunCommand;
@@ -17,7 +12,6 @@ import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DumpConstants;
-import frc.robot.Constants.OperatorConstants;
 import frc.robot.commands.AlgaeCommand;
 import frc.robot.commands.CAMcommand;
 import frc.robot.commands.DumpControl;
@@ -27,10 +21,7 @@ import frc.robot.subsystems.Algae;
 import frc.robot.subsystems.CAM;
 import frc.robot.subsystems.Dump;
 import frc.robot.subsystems.Shooter;
-import frc.robot.subsystems.SwerveSubsystem;
-import java.io.File;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import swervelib.SwerveInputStream;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,13 +36,14 @@ public class RobotContainer {
 
   LoggedDashboardChooser autoChooser = new LoggedDashboardChooser("AutoChooser");
 
-  private final SwerveSubsystem drivebase =
-      new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
+  // private final SwerveSubsystem drivebase =
+  //    new SwerveSubsystem(new File(Filesystem.getDeployDirectory(), "swerve"));
 
   /**
    * Converts driver input into a field-relative ChassisSpeeds that is controlled by angular
    * velocity.
    */
+  /*
   SwerveInputStream driveAngularVelocity =
       SwerveInputStream.of(
               drivebase.getSwerveDrive(),
@@ -66,6 +58,7 @@ public class RobotContainer {
    * Same as driveAngularVelocity, but slower full outputs at 50% speed. This is used for more
    * precise control.
    */
+  /*
   SwerveInputStream driveAngularVelocitySlowed =
       SwerveInputStream.of(
               drivebase.getSwerveDrive(),
@@ -77,6 +70,7 @@ public class RobotContainer {
           .allianceRelativeControl(true);
 
   /** Clone's the angular velocity input stream and converts it to a fieldRelative input stream. */
+  /*
   SwerveInputStream driveDirectAngle =
       driveAngularVelocity
           .copy()
@@ -100,8 +94,10 @@ public class RobotContainer {
               () -> Math.sin(driverXbox.getRawAxis(2) * Math.PI) * (Math.PI * 2),
               () -> Math.cos(driverXbox.getRawAxis(2) * Math.PI) * (Math.PI * 2))
           .headingWhile(true);
+          */
 
   private final Algae algae = new Algae();
+
   private final Shooter shooter = new Shooter();
   private final Dump dump = new Dump();
   private final CAM cam = new CAM();
@@ -149,6 +145,7 @@ public class RobotContainer {
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
     // m_driverController.b().whileTrue(m_exampleSubsystem.exampleMethodCommand());
+    /*
     Command driveFieldOrientedAnglularVelocity = drivebase.driveFieldOriented(driveAngularVelocity);
     Command driveFieldOrientedAnglularVelocitySlowed =
         drivebase.driveFieldOriented(driveAngularVelocitySlowed);
@@ -156,7 +153,9 @@ public class RobotContainer {
         drivebase.driveFieldOriented(driveDirectAngleKeyboard);
 
     drivebase.setDefaultCommand(driveFieldOrientedAnglularVelocitySlowed);
+    */
 
+    /*
     if (Robot.isSimulation()) {
       driverXbox
           .start()
@@ -187,13 +186,15 @@ public class RobotContainer {
       driverXbox.leftBumper().whileTrue(Commands.runOnce(drivebase::lock, drivebase).repeatedly());
       driverXbox.rightBumper().onTrue(Commands.none());
 
-      driverController
-          .button(11)
-          .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L1), dump));
-      driverController
-          .button(12)
-          .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L2), dump));
-    }
+      */
+
+    driverController
+        .button(11)
+        .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L1), dump));
+    driverController
+        .button(12)
+        .toggleOnTrue(new RunCommand(() -> dump.setTargetPosition(DumpConstants.L2), dump));
+    // }
   }
 
   /**
@@ -214,12 +215,13 @@ public class RobotContainer {
       return doNothing();
     } */
     // return drivebase.getAutonomousCommand(autoChooser.get().getName());
-    return drivebase
-        .driveCommand(() -> -0.5, () -> 0, () -> 0)
-        .repeatedly()
-        .withTimeout(2)
-        .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
-        .andThen(shooter.AutoShoot());
+    /*return drivebase
+    .driveCommand(() -> -0.5, () -> 0, () -> 0)
+    .repeatedly()
+    .withTimeout(2)
+    .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
+    .andThen(shooter.AutoShoot());*/
+    return nothing;
   }
 
   public void setDriveMode() {
@@ -227,7 +229,7 @@ public class RobotContainer {
   }
 
   public void setMotorBrake(boolean brake) {
-    drivebase.setMotorBrake(brake);
+    // drivebase.setMotorBrake(brake);
   }
 
   public Command nothing = Commands.none();
