@@ -218,7 +218,6 @@ public class RobotContainer {
         .driveCommand(() -> 0, () -> 0, () -> 0)
         .repeatedly()
         .withTimeout(.5)
-        .andThen(drivebase.driveCommand(() -> 0, () -> 0, () -> 0))
         .andThen(() -> dump.Back())
         .repeatedly()
         .withTimeout(2);
