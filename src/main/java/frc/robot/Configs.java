@@ -29,11 +29,6 @@ public final class Configs {
           .maxAcceleration(1000)
           .positionMode(MAXMotionPositionMode.kMAXMotionTrapezoidal)
           .allowedClosedLoopError(DumpConstants.kPositionTolerance);
-      FourbarConfig.softLimit
-          .forwardSoftLimit(DumpConstants.kFwdSoftLimit)
-          .reverseSoftLimit(DumpConstants.kRevSoftLimit)
-          .reverseSoftLimitEnabled(true)
-          .forwardSoftLimitEnabled(true);
     }
   }
 }

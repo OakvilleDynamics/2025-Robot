@@ -32,9 +32,9 @@ public class DumpControl extends Command {
     m_DumpSubsystem.setFourbarSpeedClamped(-DumpJoystick.getY());
 
     // Check if the joystick is being moved, if it is, report that the fourbar is moving
-    if (DumpJoystick.getTrigger()) {
+    if (DumpJoystick.getRawButton(3)) {
       m_DumpSubsystem.DumpCoral();
-    } else if (DumpJoystick.getRawButton(2)) {
+    } else if (DumpJoystick.getRawButton(5)) {
       m_DumpSubsystem.Back();
     } else {
       m_DumpSubsystem.disableFourBar();
